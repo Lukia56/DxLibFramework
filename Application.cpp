@@ -1,0 +1,78 @@
+#include "Application.h"
+#include <DxLib.h>
+#include "Scene/SceneManager.h"
+
+Application::Application()
+{
+}
+
+Application::~Application()
+{
+}
+
+bool Application::Initialize()
+{
+	bool result;
+
+	ChangeWindowMode(true);
+
+	// DxLibを初期化
+	result = DxLib_Init() != -1;
+	// DxLibの初期化に失敗していたら早期リターン
+	if (!result) return false;
+
+	SetDrawScreen(DX_SCREEN_BACK);
+
+	// シーンマネージャーを初期化
+	mSceneManager = std::make_unique<SceneManager>();
+	mSceneManager->Initialize();
+
+	// ここまで問題が起きなかったらtrue
+	return true;
+}
+
+void Application::Finalize()
+{
+	// メンバの後処理
+	mSceneManager->Finalize();
+
+	// メモリリークが起きる可能性があるため最後に呼ぶ
+	DxLib_End();
+}
+
+void Application::GameLoop()
+{
+	// 問題が起きない限り処理を繰り返す
+	while (ProcessMessage() == 0)
+	{
+		ProcessInput();
+		Update();
+		ProcessOutput();
+
+#ifdef _DEBUG
+		if (CheckHitKey(KEY_INPUT_ESCAPE)) break;
+#endif
+	}
+}
+
+void Application::ProcessInput()
+{
+}
+
+void Application::Update()
+{
+	mSceneManager->Update();
+}
+
+void Application::ProcessOutput()
+{
+	// 描画
+	ClearDrawScreen();
+	clsDx();
+
+	mSceneManager->Draw();
+	mSceneManager->DebugDraw();
+
+	// 画面に表示
+	ScreenFlip();
+}

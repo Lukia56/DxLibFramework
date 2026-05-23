@@ -1,0 +1,121 @@
+#include "Collision3D.h"
+#include <DxLib.h>
+#include "Utility/Color.h"
+#include "Utility/Math.h"
+
+namespace Collision3D
+{
+	// ‹…
+
+	void Sphere3D::DebugDraw() const
+	{
+		DrawSphere3D(mCenterPos.GetAsDxLibVector(), mRadius, 10, Color::kWhite, Color::kWhite, false);
+	}
+
+	Collision3D::Result Sphere3D::Check(const Sphere3D* other) const
+	{
+		Collision3D::Result result;
+
+		// ‹——£‚ðŒvŽZ
+		Vector3 dist = this->GetPosition() - other->GetPosition();
+		float sqDistLen = dist.GetSqLength();
+		// ”¼Œa‚Ì˜a‚ðŒvŽZ
+		float radiusSum = this->GetRadius() + other->GetRadius();
+
+		// Õ“Ë‚µ‚Ä‚¢‚È‚¢‚©ŒvŽZ
+		if (sqDistLen > Math::Sqr(radiusSum)) return result;
+
+		result.isHit = true;
+
+		// ‚ß‚èž‚Ý‚Ì–@ü‚ðŒvŽZ
+		result.normal = dist.GetNormalize();
+		// Š®‘S‚É“¯‚¶ˆÊ’u‚¾‚Á‚½‚ç–@ü‚ÌŒü‚«‚ð•Ï‚¦‚é
+		if (result.normal == Vector3::Zero) result.normal = Vector3::XAxis;
+
+		// ‚ß‚èž‚Ý‹ï‡‚ðŒvŽZ
+		result.penetration = radiusSum - dist.GetLength();
+
+		return result;
+	}
+
+	Collision3D::Result Sphere3D::Check(const AABB3D* other) const
+	{
+		return CheckCollision(other);
+	}
+
+	// AABB
+
+	void AABB3D::DebugDraw() const
+	{
+		Vector3 minPos = this->GetPosition() - this->GetHalfSize();
+		Vector3 maxPos = this->GetPosition() + this->GetHalfSize();
+
+		DrawCube3D(minPos.GetAsDxLibVector(), maxPos.GetAsDxLibVector(), Color::kWhite, Color::kWhite, false);
+	}
+
+	Collision3D::Result AABB3D::Check(const Sphere3D* other) const
+	{
+		return Collision3D::Result();
+	}
+
+	Collision3D::Result AABB3D::Check(const AABB3D* other) const
+	{
+		Collision3D::Result result;
+
+		// Šp‚ÌÀ•W‚ðƒLƒƒƒbƒVƒ…
+		Vector3 myMinPos = this->GetPosition() - this->GetHalfSize();
+		Vector3 myMaxPos = this->GetPosition() + this->GetHalfSize();
+		Vector3 otherMinPos = other->GetPosition() - other->GetHalfSize();
+		Vector3 otherMaxPos = other->GetPosition() + other->GetHalfSize();
+
+		// Õ“Ë‚µ‚Ä‚¢‚È‚¢‚©ŒvŽZ
+		if (myMinPos.x > otherMaxPos.x) return result;
+		if (myMaxPos.x < otherMinPos.x) return result;
+
+		if (myMinPos.y > otherMaxPos.y) return result;
+		if (myMaxPos.y < otherMinPos.y) return result;
+
+		if (myMinPos.z > otherMaxPos.z) return result;
+		if (myMaxPos.z < otherMinPos.z) return result;
+
+		result.isHit = true;
+
+		// ‚ß‚èž‚Ý‹ï‡‚ðŒvŽZ
+		Vector3 overlaps;
+		overlaps.x = Math::Min(myMaxPos.x, otherMaxPos.x) - Math::Max(myMinPos.x, otherMinPos.x);
+		overlaps.y = Math::Min(myMaxPos.y, otherMaxPos.y) - Math::Max(myMinPos.y, otherMinPos.y);
+		overlaps.z = Math::Min(myMaxPos.z, otherMaxPos.z) - Math::Max(myMinPos.z, otherMinPos.z);
+
+		// ‚ß‚èž‚Ý—Ê‚ªˆê”Ô­‚È‚¢¬•ª‚ð‚ß‚èž‚Ý‹ï‡‚É‚·‚é
+		float minOverlaps = overlaps.x;
+		result.normal = Vector3::XAxis;
+		if (minOverlaps > overlaps.y)
+		{
+			minOverlaps = overlaps.y;
+			result.normal = Vector3::YAxis;
+		}
+		if (minOverlaps > overlaps.z)
+		{
+			minOverlaps = overlaps.z;
+			result.normal = Vector3::ZAxis;
+		}
+		result.penetration = minOverlaps;
+
+		// –@ü‚Ì•„†‚ðŒvŽZ
+		Vector3 vect = this->GetPosition() - other->GetPosition();
+		if (result.normal == Vector3::XAxis)
+		{
+			result.normal *= (vect.x <= 0.0f ? 1.0f : -1.0f);
+		}
+		else if (result.normal == Vector3::YAxis)
+		{
+			result.normal *= (vect.y <= 0.0f ? 1.0f : -1.0f);
+		}
+		else if (result.normal == Vector3::ZAxis)
+		{
+			result.normal *= (vect.z <= 0.0f ? 1.0f : -1.0f);
+		}
+
+		return result;
+	}
+}
