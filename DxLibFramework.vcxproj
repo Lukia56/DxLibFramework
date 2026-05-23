@@ -83,7 +83,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)Include\DxLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -101,7 +101,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)Include\DxLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,7 +117,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)Include\DxLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,12 +135,31 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)Include\DxLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Scene\SceneInit.cpp" />
+    <ClCompile Include="System\InputManager.cpp" />
+    <ClCompile Include="System\Input\Device\InputDeviceBase.cpp" />
+    <ClCompile Include="System\Input\Device\InputDeviceGamepad.cpp" />
+    <ClCompile Include="System\Input\Device\InputDeviceKeyboard.cpp" />
+    <ClCompile Include="System\Input\Device\InputDeviceMouse.cpp" />
+    <ClCompile Include="System\Input\Format\InputFormatBase.cpp" />
+    <ClCompile Include="System\Input\Format\InputFormatGamepadButton.cpp" />
+    <ClCompile Include="System\Input\Format\InputFormatGamepadThumb.cpp" />
+    <ClCompile Include="System\Input\Format\InputFormatGamepadTrigger.cpp" />
+    <ClCompile Include="System\Input\Format\InputFormatKeyboard.cpp" />
+    <ClCompile Include="System\Input\Format\InputFormatMouseButton.cpp" />
+    <ClCompile Include="System\Input\Format\InputFormatMouseDelta.cpp" />
+    <ClCompile Include="System\Input\Format\InputFormatMouseWheel.cpp" />
+    <ClCompile Include="System\Input\Gamepad.cpp" />
+    <ClCompile Include="System\Input\Keyboard.cpp" />
+    <ClCompile Include="System\Input\Modifier\InputModifierDeadzone.cpp" />
+    <ClCompile Include="System\Input\Modifier\InputModifierNegate.cpp" />
+    <ClCompile Include="System\Input\Modifier\InputModifierSwizzleAxis.cpp" />
+    <ClCompile Include="System\Input\Mouse.cpp" />
     <ClCompile Include="World\Components\Collision3D.cpp" />
     <ClCompile Include="World\Objects\Box.cpp" />
     <ClCompile Include="World\Objects\Bullet.cpp" />
@@ -155,6 +174,29 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Scene\SceneInit.h" />
+    <ClInclude Include="System\InputManager.h" />
+    <ClInclude Include="System\Input\Device\InputDeviceBase.h" />
+    <ClInclude Include="System\Input\Device\InputDeviceGamepad.h" />
+    <ClInclude Include="System\Input\Device\InputDeviceKeyboard.h" />
+    <ClInclude Include="System\Input\Device\InputDeviceMouse.h" />
+    <ClInclude Include="System\Input\Format\InputFormatBase.h" />
+    <ClInclude Include="System\Input\Format\InputFormatGamepadButton.h" />
+    <ClInclude Include="System\Input\Format\InputFormatGamepadThumb.h" />
+    <ClInclude Include="System\Input\Format\InputFormatGamepadTrigger.h" />
+    <ClInclude Include="System\Input\Format\InputFormatKeyboard.h" />
+    <ClInclude Include="System\Input\Format\InputFormatMouseButton.h" />
+    <ClInclude Include="System\Input\Format\InputFormatMouseDelta.h" />
+    <ClInclude Include="System\Input\Format\InputFormatMouseWheel.h" />
+    <ClInclude Include="System\Input\Gamepad.h" />
+    <ClInclude Include="System\Input\Keyboard.h" />
+    <ClInclude Include="System\Input\Literal\InputActions.h" />
+    <ClInclude Include="System\Input\Literal\InputProperty.h" />
+    <ClInclude Include="System\Input\Literal\KeyCodes.h" />
+    <ClInclude Include="System\Input\Modifier\IInputModifier.h" />
+    <ClInclude Include="System\Input\Modifier\InputModifierDeadzone.h" />
+    <ClInclude Include="System\Input\Modifier\InputModifierNegate.h" />
+    <ClInclude Include="System\Input\Modifier\InputModifierSwizzleAxis.h" />
+    <ClInclude Include="System\Input\Mouse.h" />
     <ClInclude Include="World\Components\Collision3D.h" />
     <ClInclude Include="World\Objects\Box.h" />
     <ClInclude Include="World\Objects\Bullet.h" />

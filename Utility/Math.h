@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 #include <numbers>
+#include "Vector.h"
 
 namespace Math
 {
@@ -137,5 +138,76 @@ namespace Math
 		if (std::abs(value) <= epsilon) return true;
 
 		return false;
+	}
+
+	/// <summary>
+	/// 1D軸の値をデッドゾーン内の割合にフィルタリングする
+	/// </summary>
+	/// <param name="axis">軸</param>
+	/// <param name="maxValue">最大値</param>
+	/// <param name="deadzoneMin">デッドゾーンの最小割合</param>
+	/// <param name="deadzoneMax">デッドゾーンの最大割合</param>
+	/// <returns>デッドゾーンを適用して正規化した軸</returns>
+	inline float Filter1D(int axis, int maxValue, float deadzoneMin, float deadzoneMax)
+	{
+		// デッドゾーンをmaxValueの割合に変換
+		const int dzMin = static_cast<int>(maxValue * deadzoneMin);
+		const int dzMax = static_cast<int>(maxValue * deadzoneMax);
+
+		// 計算しやすくするために絶対値を取得する
+		const int absAxis = std::abs(axis);
+
+		float result = 0.0f;
+
+		// デッドゾーンより小さい入力なら0とする
+		if (absAxis < dzMin) return result;
+
+		// デッドゾーンの最小値と最大値の間の割合を取得する
+		result = static_cast<float>(absAxis - dzMin) / static_cast<float>(dzMax - dzMin);
+
+		// 符号を復元する
+		result *= Math::Sign(axis);
+
+		// 値を-1から1に収める
+		result = Clamp(result, -1.0f, 1.0f);
+
+		return result;
+	}
+
+	/// <summary>
+	/// 2D軸の値をデッドゾーン内の割合にフィルタリングする
+	/// </summary>
+	/// <param name="axisX">軸X</param>
+	/// <param name="axisY">軸Y</param>
+	/// <param name="maxValue">最大値</param>
+	/// <param name="deadzoneMin">デッドゾーンの最小割合</param>
+	/// <param name="deadzoneMax">デッドゾーンの最大割合</param>
+	/// <returns>デッドゾーンを適用して正規化した軸</returns>
+	inline Vector2& Filter2D(float axisX, float axisY, float maxValue, float deadzoneMin, float deadzoneMax)
+	{
+		// デッドゾーンをmaxValueの割合に変換
+		const int dzMin = maxValue * deadzoneMin;
+		const int dzMax = maxValue * deadzoneMax;
+
+		// ベクトルに変換
+		const Vector2 dir = Vector2(axisX, axisY);
+
+		const float len = dir.GetLength();
+
+		Vector2 result = Vector2::Zero;
+
+		// デッドゾーンより小さい入力なら0とする
+		if (len < dzMin) return result;
+
+		// デッドゾーンの最小値と最大値の間の割合を取得する
+		float rate = static_cast<float>(len - dzMin) / static_cast<float>(dzMax - dzMin);
+
+		// 値を0から1に収める
+		rate = Clamp(rate, 0.0f, 1.0f);
+
+		// スケーリング
+		result = dir * (rate / len);
+
+		return result;
 	}
 }

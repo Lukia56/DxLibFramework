@@ -1,6 +1,7 @@
 #include "Application.h"
 #include <DxLib.h>
 #include "Scene/SceneManager.h"
+#include "System/InputManager.h"
 
 Application::Application()
 {
@@ -26,6 +27,9 @@ bool Application::Initialize()
 	// シーンマネージャーを初期化
 	mSceneManager = std::make_unique<SceneManager>();
 	mSceneManager->Initialize();
+
+	// 入力マネージャーを初期化
+	InputManager::GetInstance().Initialize();
 
 	// ここまで問題が起きなかったらtrue
 	return true;
@@ -57,6 +61,7 @@ void Application::GameLoop()
 
 void Application::ProcessInput()
 {
+	InputManager::GetInstance().Update();
 }
 
 void Application::Update()
