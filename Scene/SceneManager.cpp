@@ -35,7 +35,7 @@ void SceneManager::Update()
 
 void SceneManager::Draw()
 {
-
+	mCurrentScene->DrawRootObjects();
 }
 
 void SceneManager::DebugDraw()

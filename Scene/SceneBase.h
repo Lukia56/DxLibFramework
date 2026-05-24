@@ -39,6 +39,11 @@ public:
 	/// </summary>
 	void UpdateRootObjects();
 
+	/// <summary>
+	/// ルートオブジェクトの描画処理を呼ぶ
+	/// </summary>
+	void DrawRootObjects();
+
 protected:
 
 	/// <summary>
@@ -52,6 +57,11 @@ private:
 	/// ゲームオブジェクトの更新処理
 	/// </summary>
 	void Update(GameObject* gameObject);
+
+	/// <summary>
+	/// ゲームオブジェクトの描画処理
+	/// </summary>
+	void Draw(GameObject* gameObject);
 
 private:
 	

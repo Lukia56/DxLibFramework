@@ -2,25 +2,27 @@
 
 #include "../GameObject.h"
 
+namespace Collision3D
+{
+	class AABB3D;
+}
+
 class Player : public GameObject
 {
 public:
 
-	Player() = default;
+	Player();
 	~Player();
 
-	/// <summary>
-	/// ‰Šú‰»ˆ—
-	/// </summary>
 	void Init() override;
 
-	/// <summary>
-	/// I—¹ˆ—
-	/// </summary>
 	void Finalize() override;
 
-	/// <summary>
-	/// XVˆ—
-	/// </summary>
 	void Update() override;
+
+	void Draw() override;
+
+private:
+
+	std::unique_ptr<Collision3D::AABB3D> mCollider;
 };

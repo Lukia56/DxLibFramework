@@ -24,12 +24,17 @@ public:
 	/// <summary>
 	/// 終了処理
 	/// </summary>
-	virtual void Finalize() = 0;
+	virtual void Finalize() {};
 
 	/// <summary>
 	/// 更新処理
 	/// </summary>
 	virtual void Update() = 0;
+
+	/// <summary>
+	/// 描画処理
+	/// </summary>
+	virtual void Draw() {};
 
 	/// <summary>
 	/// 削除処理が呼ばれているかチェックし

@@ -29,6 +29,15 @@ void SceneBase::UpdateRootObjects()
 	}
 }
 
+void SceneBase::DrawRootObjects()
+{
+	// ゲームオブジェクトの描画処理を呼ぶ
+	for (const auto& it : mRootObjects)
+	{
+		Draw(it.get());
+	}
+}
+
 void SceneBase::Update(GameObject* gameObject)
 {
 	gameObject->Update();
@@ -37,6 +46,17 @@ void SceneBase::Update(GameObject* gameObject)
 	for (const auto& it : gameObject->GetChildren())
 	{
 		Update(it.get());
+	}
+}
+
+void SceneBase::Draw(GameObject* gameObject)
+{
+	gameObject->Draw();
+
+	// 子オブジェクトについて再帰
+	for (const auto& it : gameObject->GetChildren())
+	{
+		Draw(it.get());
 	}
 }
 

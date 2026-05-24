@@ -15,11 +15,6 @@ public:
 	void Init() override;
 
 	/// <summary>
-	/// I—¹ˆ—
-	/// </summary>
-	void Finalize() override;
-
-	/// <summary>
 	/// XVˆ—
 	/// </summary>
 	void Update() override;

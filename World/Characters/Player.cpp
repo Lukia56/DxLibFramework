@@ -3,10 +3,16 @@
 #include <memory>
 #include <DxLib.h>
 #include "../Objects/Bullet.h"
+#include "../Components/Collision3D.h"
 
 namespace
 {
-	bool kLog[2] = { false, false };
+}
+
+Player::Player() :
+	mCollider(nullptr)
+{
+	mCollider = std::make_unique<Collision3D::AABB3D>();
 }
 
 Player::~Player()
@@ -27,11 +33,8 @@ void Player::Finalize()
 
 void Player::Update()
 {
-	if (kLog[0] && GetChildren().size() > 0)
-	{
-		Destroy(GetChildren().front().get());
-	}
+}
 
-	kLog[1] = kLog[0];
-	kLog[0] = CheckHitKey(KEY_INPUT_SPACE);
+void Player::Draw()
+{
 }
