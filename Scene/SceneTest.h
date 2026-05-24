@@ -6,7 +6,7 @@ class SceneTest : public SceneBase
 {
 public:
 
-	SceneTest() = default;
+	SceneTest();
 	~SceneTest() = default;
 
 	/// <summary>

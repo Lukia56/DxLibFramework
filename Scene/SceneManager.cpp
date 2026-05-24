@@ -30,6 +30,7 @@ void SceneManager::Update()
 	// ƒV[ƒ“‚ðØ‚è‘Ö‚¦‚é
 	mCurrentScene->Finalize();
 	mCurrentScene = std::move(nextScene);
+	mCurrentScene->Init();
 }
 
 void SceneManager::Draw()

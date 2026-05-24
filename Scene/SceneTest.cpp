@@ -1,9 +1,13 @@
 #include "SceneTest.h"
 #include "../World/Characters/Player.h"
 
-void SceneTest::Init()
+SceneTest::SceneTest()
 {
 	Add(std::make_unique<Player>());
+}
+
+void SceneTest::Init()
+{
 }
 
 void SceneTest::Finalize()

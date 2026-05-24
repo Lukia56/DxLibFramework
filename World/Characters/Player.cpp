@@ -11,12 +11,11 @@ namespace
 
 Player::~Player()
 {
-	assert(false && "Player // デストラクタが呼ばれました");
 }
 
 void Player::Init()
 {
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		Add(std::make_unique<Bullet>());
 	}
@@ -24,7 +23,6 @@ void Player::Init()
 
 void Player::Finalize()
 {
-	assert(false && "Player // Finalizeが呼ばれました");
 }
 
 void Player::Update()

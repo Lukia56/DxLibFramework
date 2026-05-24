@@ -5,7 +5,6 @@
 
 Bullet::~Bullet()
 {
-	assert(false && "Bullet // デストラクタが呼ばれました");
 }
 
 void Bullet::Init()
@@ -18,7 +17,6 @@ void Bullet::Init()
 
 void Bullet::Finalize()
 {
-	assert(false && "Bullet // Finalizeが呼ばれました");
 }
 
 void Bullet::Update()
