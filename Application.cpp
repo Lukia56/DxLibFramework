@@ -2,6 +2,7 @@
 #include <DxLib.h>
 #include "Scene/SceneManager.h"
 #include "System/InputManager.h"
+#include "Utility/Random.h"
 
 Application::Application()
 {
@@ -24,6 +25,11 @@ bool Application::Initialize()
 
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	SetUseZBuffer3D(true);
+	SetWriteZBuffer3D(true);
+	SetUseBackCulling(false);
+	SetBackgroundColor(128, 128, 128);
+
 	// シーンマネージャーを初期化
 	mSceneManager = std::make_unique<SceneManager>();
 	mSceneManager->Initialize();
@@ -31,10 +37,8 @@ bool Application::Initialize()
 	// 入力マネージャーを初期化
 	InputManager::GetInstance().Initialize();
 
-	SetUseZBuffer3D(true);
-	SetWriteZBuffer3D(true);
-	SetUseBackCulling(false);
-	SetBackgroundColor(128, 128, 128);
+	// 乱数生成機を初期化
+	Random::Init();
 
 	// ここまで問題が起きなかったらtrue
 	return true;
