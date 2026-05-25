@@ -3,6 +3,11 @@
 #include "Utility/Color.h"
 #include "Utility/Math.h"
 
+namespace
+{
+	constexpr int kDimensionNum = 3;
+}
+
 namespace Collision3D
 {
 	// 球
@@ -55,7 +60,33 @@ namespace Collision3D
 
 	Collision3D::Result AABB3D::Check(const Sphere3D* other) const
 	{
-		return Collision3D::Result();
+		Collision3D::Result result;
+
+		// 座標をキャッシュ
+		Vector3 myMinPos = this->GetPosition() - this->GetHalfSize();
+		Vector3 myMaxPos = this->GetPosition() + this->GetHalfSize();
+		Vector3 spherePos = other->GetPosition();
+
+		// 衝突していないか計算
+		float sqLength = 0.0f;
+		for (int i = 0; i < kDimensionNum; i++)
+		{
+			if (spherePos[i] < myMinPos[i])
+			{
+				sqLength += Math::Sqr(spherePos[i] - myMinPos[i]);
+			}
+			else if (spherePos[i] > myMaxPos[i])
+			{
+				sqLength += Math::Sqr(spherePos[i] - myMaxPos[i]);
+			}
+		}
+		if (sqLength > other->GetRadius()) return result;
+
+		result.isHit = true;
+
+
+
+		return result;
 	}
 
 	Collision3D::Result AABB3D::Check(const AABB3D* other) const

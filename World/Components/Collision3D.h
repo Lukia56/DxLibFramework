@@ -72,6 +72,7 @@ namespace Collision3D
 	public:
 
 		Sphere3D() = default;
+		Sphere3D(const Vector3& pos, float radius) : mCenterPos(pos), mRadius(radius) {}
 		~Sphere3D() = default;
 
 		/// <summary>
@@ -120,6 +121,7 @@ namespace Collision3D
 	public:
 
 		AABB3D() = default;
+		AABB3D(const Vector3& pos, const Vector3& size) : mCenterPos(pos), mHalfSize(size * 0.5f) {}
 		~AABB3D() = default;
 
 		/// <summary>
