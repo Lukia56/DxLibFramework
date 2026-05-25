@@ -80,7 +80,7 @@ namespace Collision3D
 				sqLength += Math::Sqr(spherePos[i] - myMaxPos[i]);
 			}
 		}
-		if (sqLength > other->GetRadius()) return result;
+		if (sqLength > Math::Sqr(other->GetRadius())) return result;
 
 		result.isHit = true;
 
