@@ -75,6 +75,11 @@ struct Vector2
 		return *this;
 	}
 
+	float operator[](int index) const
+	{
+		return *(&x + index);
+	}
+
 	constexpr bool operator==(const Vector2& v) const { return x == v.x && y == v.y; }
 	constexpr bool operator!=(const Vector2& v) const { return x != v.x || y != v.y; }
 
@@ -218,6 +223,11 @@ struct Vector3
 		z /= s;
 
 		return *this;
+	}
+
+	float operator[](int index) const
+	{
+		return *(&x + index);
 	}
 
 	constexpr bool operator==(const Vector3& v) const { return x == v.x && y == v.y && z == v.z; }
