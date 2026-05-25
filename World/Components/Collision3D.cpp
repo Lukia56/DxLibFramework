@@ -67,6 +67,8 @@ namespace Collision3D
 		Vector3 myMaxPos = this->GetPosition() + this->GetHalfSize();
 		Vector3 spherePos = other->GetPosition();
 
+		float sphereRadius = other->GetRadius();
+
 		// Õ“Ë‚µ‚Ä‚¢‚È‚¢‚©ŒvZ
 		float sqLength = 0.0f;
 		for (int i = 0; i < kDimensionNum; i++)
@@ -80,11 +82,45 @@ namespace Collision3D
 				sqLength += Math::Sqr(spherePos[i] - myMaxPos[i]);
 			}
 		}
-		if (sqLength > Math::Sqr(other->GetRadius())) return result;
+		if (sqLength > Math::Sqr(sphereRadius)) return result;
 
 		result.isHit = true;
 
+		// ‚ß‚è‚İ‹ï‡‚ğŒvZ
+		Vector3 overlaps;
+		overlaps.x = Math::Min(myMaxPos.x, spherePos.x + sphereRadius) - Math::Max(myMinPos.x, spherePos.x - sphereRadius);
+		overlaps.y = Math::Min(myMaxPos.y, spherePos.y + sphereRadius) - Math::Max(myMinPos.y, spherePos.y - sphereRadius);
+		overlaps.z = Math::Min(myMaxPos.z, spherePos.z + sphereRadius) - Math::Max(myMinPos.z, spherePos.z - sphereRadius);
 
+		// ‚ß‚è‚İ—Ê‚ªˆê”Ô­‚È‚¢¬•ª‚ğ‚ß‚è‚İ‹ï‡‚É‚·‚é
+		float minOverlaps = overlaps.x;
+		result.normal = Vector3::XAxis;
+		if (minOverlaps > overlaps.y)
+		{
+			minOverlaps = overlaps.y;
+			result.normal = Vector3::YAxis;
+		}
+		if (minOverlaps > overlaps.z)
+		{
+			minOverlaps = overlaps.z;
+			result.normal = Vector3::ZAxis;
+		}
+		result.penetration = minOverlaps;
+
+		// –@ü‚Ì•„†‚ğŒvZ
+		Vector3 vect = spherePos - this->GetPosition();
+		if (result.normal == Vector3::XAxis)
+		{
+			result.normal *= (vect.x <= 0.0f ? 1.0f : -1.0f);
+		}
+		else if (result.normal == Vector3::YAxis)
+		{
+			result.normal *= (vect.y <= 0.0f ? 1.0f : -1.0f);
+		}
+		else if (result.normal == Vector3::ZAxis)
+		{
+			result.normal *= (vect.z <= 0.0f ? 1.0f : -1.0f);
+		}
 
 		return result;
 	}
