@@ -15,10 +15,6 @@ void Bullet::Init()
 	}
 }
 
-void Bullet::Finalize()
-{
-}
-
 void Bullet::Update()
 {
 }

@@ -10,10 +10,6 @@ void Box::Init()
 
 }
 
-void Box::Finalize()
-{
-}
-
 void Box::Update()
 {
 
