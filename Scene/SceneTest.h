@@ -2,12 +2,15 @@
 
 #include "SceneBase.h"
 
+class Player;
+class Crate;
+
 class SceneTest : public SceneBase
 {
 public:
 
 	SceneTest();
-	~SceneTest() = default;
+	~SceneTest();
 
 	/// <summary>
 	/// 初期化処理
@@ -24,4 +27,9 @@ public:
 	/// </summary>
 	/// <returns>次のシーンのポインタ</returns>
 	std::unique_ptr<SceneBase> Update() override;
+
+private:
+
+	Player* mPlayer;
+	Crate* mCrate;
 };

@@ -2,6 +2,8 @@
 
 #include "../GameObject.h"
 
+class Crate;
+
 namespace Collision3D
 {
 	class AABB3D;
@@ -12,6 +14,7 @@ class Player : public GameObject
 public:
 
 	Player();
+	Player(Crate* crate);
 	~Player();
 
 	void Init() override;
@@ -25,4 +28,6 @@ public:
 private:
 
 	std::unique_ptr<Collision3D::AABB3D> mCollider;
+
+	Crate* mCrate;
 };

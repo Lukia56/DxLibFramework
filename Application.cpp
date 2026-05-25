@@ -31,6 +31,11 @@ bool Application::Initialize()
 	// 入力マネージャーを初期化
 	InputManager::GetInstance().Initialize();
 
+	SetUseZBuffer3D(true);
+	SetWriteZBuffer3D(true);
+	SetUseBackCulling(false);
+	SetBackgroundColor(128, 128, 128);
+
 	// ここまで問題が起きなかったらtrue
 	return true;
 }

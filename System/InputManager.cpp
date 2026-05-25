@@ -51,16 +51,16 @@ bool InputManager::Initialize()
 	Bind(Input::Action::Move, Input::Device::Gamepad, KeyCode::Button::GpLeftThumb, {std::make_shared<InputModifierNegate>(false, true, false)});
 	Bind(Input::Action::Move, Input::Device::Keyboard, KeyCode::Button::W,
 		{
-			std::make_shared<InputModifierNegate>(true, true, false),
-			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::YXZ)
+			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::ZYX)
 		});
 	Bind(Input::Action::Move, Input::Device::Keyboard, KeyCode::Button::S,
 		{
-			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::YXZ)
+			std::make_shared<InputModifierNegate>(true, true, true),
+			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::ZYX)
 		});
 	Bind(Input::Action::Move, Input::Device::Keyboard, KeyCode::Button::A,
 		{
-			std::make_shared<InputModifierNegate>(true, true, false)
+			std::make_shared<InputModifierNegate>(true, true, true)
 		});
 	Bind(Input::Action::Move, Input::Device::Keyboard, KeyCode::Button::D);
 
