@@ -186,8 +186,8 @@ namespace Math
 	inline Vector2 Filter2D(float axisX, float axisY, float maxValue, float deadzoneMin, float deadzoneMax)
 	{
 		// デッドゾーンをmaxValueの割合に変換
-		const int dzMin = maxValue * deadzoneMin;
-		const int dzMax = maxValue * deadzoneMax;
+		const float dzMin = maxValue * deadzoneMin;
+		const float dzMax = maxValue * deadzoneMax;
 
 		// ベクトルに変換
 		const Vector2 dir = Vector2(axisX, axisY);
@@ -200,7 +200,7 @@ namespace Math
 		if (len < dzMin) return result;
 
 		// デッドゾーンの最小値と最大値の間の割合を取得する
-		float rate = static_cast<float>(len - dzMin) / static_cast<float>(dzMax - dzMin);
+		float rate = (len - dzMin) / (dzMax - dzMin);
 
 		// 値を0から1に収める
 		rate = Clamp(rate, 0.0f, 1.0f);

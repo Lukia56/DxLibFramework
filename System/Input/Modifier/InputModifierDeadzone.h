@@ -20,4 +20,3 @@ private:
 	// デッドゾーンの範囲
 	float mDeadzoneMin, mDeadzoneMax;
 };
-

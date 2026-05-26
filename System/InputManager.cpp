@@ -48,7 +48,7 @@ bool InputManager::Initialize()
 	Bind(Input::Action::Left, Input::Device::Gamepad, KeyCode::Button::GpFaceLeft);
 	Bind(Input::Action::Right, Input::Device::Gamepad, KeyCode::Button::GpFaceRight);
 
-	Bind(Input::Action::Move, Input::Device::Gamepad, KeyCode::Button::GpLeftThumb, {std::make_shared<InputModifierNegate>(false, true, false)});
+	Bind(Input::Action::Move, Input::Device::Gamepad, KeyCode::Button::GpLeftThumb, { std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::XZY) });
 	Bind(Input::Action::Move, Input::Device::Keyboard, KeyCode::Button::W,
 		{
 			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::ZYX)
