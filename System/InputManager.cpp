@@ -149,7 +149,7 @@ Vector2 InputManager::GetAsVector2(Input::Action action) const
 		if (std::abs(result.y) < std::abs(value.y)) result.y = value.y;
 	}
 
-	if (result != Vector2::Zero) result = result.GetNormalize();
+	if (result.GetSqLength() > 1.0f) result = result.GetNormalize();
 
 	return result;
 }
@@ -179,7 +179,7 @@ Vector3 InputManager::GetAsVector3(Input::Action action) const
 		if (std::abs(result.z) < std::abs(value.z)) result.z = value.z;
 	}
 
-	if (result != Vector3::Zero) result = result.GetNormalize();
+	if (result.GetSqLength() > 1.0f) result = result.GetNormalize();
 
 	return result;
 }
