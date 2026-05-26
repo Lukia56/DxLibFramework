@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="World\Objects\Ball.cpp" />
     <ClCompile Include="Utility\Random.cpp" />
     <ClCompile Include="World\Objects\Crate.cpp" />
     <ClCompile Include="Scene\SceneInit.cpp" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="World\Objects\Ball.h" />
     <ClInclude Include="Utility\Random.h" />
     <ClInclude Include="World\Objects\Crate.h" />
     <ClInclude Include="Scene\SceneInit.h" />

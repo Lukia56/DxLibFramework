@@ -4,6 +4,7 @@
 
 class Player;
 class Crate;
+class Ball;
 
 class SceneTest : public SceneBase
 {
@@ -32,4 +33,5 @@ private:
 
 	Player* mPlayer;
 	Crate* mCrate;
+	Ball* mBall;
 };

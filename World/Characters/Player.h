@@ -3,6 +3,7 @@
 #include "../GameObject.h"
 
 class Crate;
+class Ball;
 
 namespace Collision3D
 {
@@ -14,7 +15,6 @@ class Player : public GameObject
 public:
 
 	Player();
-	Player(Crate* crate);
 	~Player();
 
 	void Init() override;
@@ -25,9 +25,17 @@ public:
 
 	void Draw() override;
 
+public:
+
+	void SetCrate(Crate* crate) { mCrate = crate; }
+
+	void SetBall(Ball* ball) { mBall = ball; }
+
 private:
 
 	std::unique_ptr<Collision3D::AABB3D> mCollider;
 
 	Crate* mCrate;
+
+	Ball* mBall;
 };

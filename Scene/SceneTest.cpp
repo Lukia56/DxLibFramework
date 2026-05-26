@@ -1,22 +1,31 @@
 #include "SceneTest.h"
 #include "../World/Characters/Player.h"
+#include "../World/Objects/Ball.h"
 #include "../World/Objects/Crate.h"
 
 SceneTest::SceneTest() :
 	mPlayer(nullptr),
-	mCrate(nullptr)
+	mCrate(nullptr),
+	mBall(nullptr)
 {
+	auto player = std::make_unique<Player>();
 	auto crate = std::make_unique<Crate>();
-	auto player = std::make_unique<Player>(crate.get());
+	auto ball = std::make_unique<Ball>();
 
-	mCrate = crate.get();
-	Add(std::move(crate));
 	mPlayer = player.get();
 	Add(std::move(player));
+	mCrate = crate.get();
+	Add(std::move(crate));
+	mBall = ball.get();
+	Add(std::move(ball));
+
+	mPlayer->SetCrate(mCrate);
+	mPlayer->SetBall(mBall);
 }
 
 SceneTest::~SceneTest()
 {
+	mBall = nullptr;
 	mCrate = nullptr;
 	mPlayer = nullptr;
 }
