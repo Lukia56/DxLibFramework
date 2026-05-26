@@ -45,7 +45,9 @@ namespace Collision3D
 
 	Collision3D::Result Sphere3D::Check(const AABB3D* other) const
 	{
-		return CheckCollision(other);
+		Collision3D::Result result = CheckCollision(other);
+		result.normal *= -1;
+		return result;
 	}
 
 	// AABB
@@ -108,7 +110,7 @@ namespace Collision3D
 		result.penetration = minOverlaps;
 
 		// –@ü‚Ì•„†‚ðŒvŽZ
-		Vector3 vect = spherePos - this->GetPosition();
+		Vector3 vect = this->GetPosition() - spherePos;
 		if (result.normal == Vector3::XAxis)
 		{
 			result.normal *= (vect.x <= 0.0f ? 1.0f : -1.0f);
