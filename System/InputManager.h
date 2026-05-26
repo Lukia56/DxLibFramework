@@ -75,12 +75,12 @@ public:
 	/// <summary>
 	/// Vector2のアナログ値として取得する
 	/// </summary>
-	const Vector2& GetAsVector2(Input::Action action) const;
+	Vector2 GetAsVector2(Input::Action action) const;
 
 	/// <summary>
 	/// Vector3のアナログ値として取得する
 	/// </summary>
-	const Vector3& GetAsVector3(Input::Action action) const;
+	Vector3 GetAsVector3(Input::Action action) const;
 
 private:
 

@@ -41,7 +41,7 @@ public:
 	/// <returns>自作キーコードを元のキーコードに紐づけるマップ</returns>
 	const LinkToKeyCode& GetLinkToKeyCode() const { return mLinkToKeyCode; };
 
-	virtual const Vector3& GetValue(const KeyCode::Button keyCode) = 0;
+	virtual Vector3 GetValue(const KeyCode::Button keyCode) = 0;
 
 private:
 
