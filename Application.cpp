@@ -1,4 +1,5 @@
 #include "Application.h"
+#include <chrono>
 #include <DxLib.h>
 #include "Scene/SceneManager.h"
 #include "System/InputManager.h"
@@ -17,6 +18,7 @@ bool Application::Initialize()
 	bool result;
 
 	ChangeWindowMode(true);
+	SetWaitVSyncFlag(false);
 
 	// DxLib‚ð‰Šú‰»
 	result = DxLib_Init() != -1;
@@ -75,7 +77,12 @@ void Application::ProcessInput()
 
 void Application::Update()
 {
+	using clock = std::chrono::steady_clock;
+	auto start = clock::now();
+
 	mSceneManager->Update();
+
+	while (std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start) < std::chrono::microseconds(16667)) {}
 }
 
 void Application::ProcessOutput()
