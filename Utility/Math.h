@@ -14,6 +14,9 @@ namespace Math
 	// 円周率 / 2 | 90度
 	constexpr float kPiOver2 = kPi / 2.0f;
 
+	// 小数の誤差許容範囲
+	constexpr float Epsilon = 0.00001f;
+
 	/// <summary>
 	/// ラジアン角に変換
 	/// </summary>
@@ -133,9 +136,24 @@ namespace Math
 	/// </summary>
 	/// <param name="value">値</param>
 	/// <param name="epsilon">許容範囲</param>
-	inline bool IsNearZero(const float value, const float epsilon = 0.00001f)
+	template <std::floating_point T>
+	constexpr bool IsNearZero(const T value, const float epsilon = Epsilon)
 	{
 		if (std::abs(value) <= epsilon) return true;
+
+		return false;
+	}
+	/// <summary>
+	/// 誤差込みで等しいと言えるかどうか
+	/// 浮動小数点数の丸め誤差対策
+	/// </summary>
+	/// <param name="a">値1</param>
+	/// <param name="b">値2</param>
+	/// <param name="epsilon">許容範囲</param>
+	template <std::floating_point T>
+	constexpr bool NearyEqual(const T a, const T b, const float epsilon = Epsilon)
+	{
+		if (std::abs(a - b) <= epsilon) return true;
 
 		return false;
 	}
