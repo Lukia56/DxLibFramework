@@ -7,11 +7,6 @@ class Keyboard
 {
 public:
 
-	/// <summary>
-	/// インスタンスの生成、取得を行う
-	/// </summary>
-	static Keyboard& GetInstance();
-
 	~Keyboard() = default;
 
 	/// <summary>
@@ -25,6 +20,11 @@ public:
 	/// <param name="keyCode">キーコード</param>
 	/// <returns>押下状態</returns>
 	bool IsDown(int keyCode);
+
+	/// <summary>
+	/// インスタンスの生成、取得を行う
+	/// </summary>
+	static Keyboard& GetInstance();
 
 private:
 

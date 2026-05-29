@@ -9,6 +9,8 @@ class Mouse
 {
 public:
 
+	~Mouse() = default;
+
 	/// <summary>
 	/// マウスの座標モード
 	/// </summary>
@@ -17,13 +19,6 @@ public:
 		Absolute,	// 絶対座標
 		Relative	// 相対座標
 	};
-
-	/// <summary>
-	/// インスタンスの生成、取得を行う
-	/// </summary>
-	static Mouse& GetInstance();
-
-	~Mouse() = default;
 	
 	/// <summary>
 	/// 更新処理
@@ -36,6 +31,8 @@ public:
 	/// <param name="keyCode">キーコード</param>
 	/// <returns>押下状態</returns>
 	bool IsDown(int keyCode);
+
+public:
 
 	/// <summary>
 	/// 絶対座標を取得する
@@ -56,6 +53,13 @@ public:
 	/// 座標モードを設定する
 	/// </summary>
 	void SetMode(Mode mode);
+
+public:
+
+	/// <summary>
+	/// インスタンスの生成、取得を行う
+	/// </summary>
+	static Mouse& GetInstance();
 
 private:
 

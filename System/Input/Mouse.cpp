@@ -2,13 +2,6 @@
 #include <DxLib.h>
 #include "Utility/Vector.h"
 
-Mouse& Mouse::GetInstance()
-{
-	static Mouse instance;
-
-	return instance;
-}
-
 void Mouse::Update()
 {
 	mState = GetMouseInput();
@@ -36,6 +29,13 @@ void Mouse::SetMode(Mode mode)
 
 	if (mode == Mode::Relative) SetMouseDispFlag(false);
 	else SetMouseDispFlag(true);
+}
+
+Mouse& Mouse::GetInstance()
+{
+	static Mouse instance;
+
+	return instance;
 }
 
 Mouse::Mouse() :

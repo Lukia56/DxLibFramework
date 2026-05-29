@@ -1,9 +1,8 @@
 #pragma once
 
 #include <unordered_map>
-#include <vector>
-#include "Input/Literal/InputProperty.h"
 #include "Input/Literal/InputActions.h"
+#include "Input/Literal/InputProperty.h"
 #include "Utility/Vector.h"
 
 class InputDeviceBase;
@@ -19,11 +18,6 @@ concept InputDevice = std::derived_from<T, InputDeviceBase>;
 class InputManager
 {
 public:
-
-	/// <summary>
-	/// インスタンスの生成、取得を行う
-	/// </summary>
-	static InputManager& GetInstance();
 
 	~InputManager() = default;
 
@@ -82,6 +76,11 @@ public:
 	/// </summary>
 	Vector3 GetAsVector3(Input::Action action) const;
 
+	/// <summary>
+	/// インスタンスの生成、取得を行う
+	/// </summary>
+	static InputManager& GetInstance();
+
 private:
 
 	InputManager() = default;
@@ -128,6 +127,8 @@ private:
 	/// <param name="type">デバイスの種類</param>
 	template <InputDevice T>
 	void RegisterDevice(Input::Device type);
+
+private:
 
 	/// <summary>
 	/// アクションのデータ

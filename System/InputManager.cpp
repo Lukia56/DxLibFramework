@@ -1,25 +1,20 @@
 #include "InputManager.h"
 #include <cmath>
 #include <memory>
+#include <unordered_map>
+#include <vector>
 #include "Input/Keyboard.h"
 #include "Input/Mouse.h"
 #include "Input/Gamepad.h"
 #include "Input/Device/InputDeviceKeyboard.h"
 #include "Input/Device/InputDeviceMouse.h"
 #include "Input/Device/InputDeviceGamepad.h"
-#include "Input/Literal/InputProperty.h"
 #include "Input/Literal/InputActions.h"
+#include "Input/Literal/InputProperty.h"
 #include "Input/Modifier/InputModifierNegate.h"
 #include "Input/Modifier/InputModifierSwizzleAxis.h"
 #include "Utility/Math.h"
 #include "Utility/Vector.h"
-
-InputManager& InputManager::GetInstance()
-{
-	static InputManager instance;
-	
-	return instance;
-}
 
 bool InputManager::Initialize()
 {
@@ -115,7 +110,7 @@ float InputManager::GetAsFloat(Input::Action action) const
 		// バインドに割り当てられた加工をする
 		for (const auto& modifier : bind.modifiers)
 		{
-			modifier->ModifyRaw(&value);
+			modifier->ModifyRaw(value);
 		}
 		
 		// 絶対値が大きい方を使用する
@@ -141,7 +136,7 @@ Vector2 InputManager::GetAsVector2(Input::Action action) const
 		// バインドに割り当てられた加工をする
 		for (const auto& modifier : bind.modifiers)
 		{
-			modifier->ModifyRaw(&value);
+			modifier->ModifyRaw(value);
 		}
 		
 		// 絶対値が大きい方を使用する
@@ -170,7 +165,7 @@ Vector3 InputManager::GetAsVector3(Input::Action action) const
 		// バインドに割り当てられた加工をする
 		for (const auto& modifier : bind.modifiers)
 		{
-			modifier->ModifyRaw(&value);
+			modifier->ModifyRaw(value);
 		}
 		
 		// 絶対値が大きい方を使用する
@@ -182,6 +177,13 @@ Vector3 InputManager::GetAsVector3(Input::Action action) const
 	if (result.GetSqLength() > 1.0f) result = result.GetNormalize();
 
 	return result;
+}
+
+InputManager& InputManager::GetInstance()
+{
+	static InputManager instance;
+
+	return instance;
 }
 
 bool InputManager::GetState(Input::Action action, InputType inputType, int frame) const

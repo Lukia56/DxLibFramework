@@ -1,4 +1,5 @@
 #include "SceneManager.h"
+#include <memory>
 #include "SceneBase.h"
 #include "SceneInit.h"
 

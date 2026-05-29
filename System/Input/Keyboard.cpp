@@ -1,13 +1,6 @@
 #include "Keyboard.h"
 #include <DxLib.h>
 
-Keyboard& Keyboard::GetInstance()
-{
-	static Keyboard instance;
-
-	return instance;
-}
-
 void Keyboard::Update()
 {
 	GetHitKeyStateAll(mState);
@@ -16,4 +9,11 @@ void Keyboard::Update()
 bool Keyboard::IsDown(int keyCode)
 {
 	return mState[keyCode];
+}
+
+Keyboard& Keyboard::GetInstance()
+{
+	static Keyboard instance;
+
+	return instance;
 }

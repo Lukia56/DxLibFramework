@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <unordered_map>
-#include <vector>
 #include "../Literal/KeyCodes.h"
 #include "Utility/Vector.h"
 
@@ -61,6 +60,9 @@ public:
 	/// <returns>押下状態</returns>
 	bool IsHeld(KeyCode::Button keyCode, int frame) const;
 
+	/// <summary>
+	/// アナログ値を取得する
+	/// </summary>
 	Vector3 GetValue(KeyCode::Button keyCode) const;
 
 protected:
@@ -73,6 +75,8 @@ protected:
 private:
 
 	void UpdatePressedFrame(InputFormatBase* format, KeyCode::Button keyCode);
+
+private:
 
 	/// <summary>
 	/// 押下時間のログ

@@ -1,6 +1,8 @@
 #include "InputFormatMouseButton.h"
 #include <DxLib.h>
 #include "../Mouse.h"
+#include "../Literal/KeyCodes.h"
+#include "Utility/Vector.h"
 
 void InputFormatMouseButton::Init()
 {

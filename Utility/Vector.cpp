@@ -1,6 +1,7 @@
 #include "Vector.h"
 #include <cassert>
 #include <cmath>
+#include <DxLib.h>
 #include "Math.h"
 
 // Vector2

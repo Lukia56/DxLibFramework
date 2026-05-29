@@ -1,5 +1,6 @@
 #include "Application.h"
 #include <chrono>
+#include <memory>
 #include <DxLib.h>
 #include "Scene/SceneManager.h"
 #include "System/InputManager.h"

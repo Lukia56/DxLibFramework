@@ -1,6 +1,7 @@
 #include "InputFormatKeyboard.h"
 #include <DxLib.h>
 #include "../Keyboard.h"
+#include "../Literal/KeyCodes.h"
 #include "Utility/Vector.h"
 
 void InputFormatKeyboard::Init()

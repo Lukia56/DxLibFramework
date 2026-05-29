@@ -1,5 +1,8 @@
 #include "GameObject.h"
 #include <cassert>
+#include <memory>
+#include <vector>
+#include "Components/Transform.h"
 
 GameObject::GameObject() :
 	mTransform(),

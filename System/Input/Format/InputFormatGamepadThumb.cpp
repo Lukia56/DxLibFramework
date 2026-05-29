@@ -1,6 +1,7 @@
 #include "InputFormatGamepadThumb.h"
 #include <DxLib.h>
 #include "../Gamepad.h"
+#include "../Literal/KeyCodes.h"
 #include "Utility/Math.h"
 #include "Utility/Vector.h"
 

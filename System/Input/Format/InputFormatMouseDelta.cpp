@@ -1,6 +1,7 @@
 #include "InputFormatMouseDelta.h"
 #include <cmath>
 #include "../Mouse.h"
+#include "../Literal/KeyCodes.h"
 #include "Utility/Math.h"
 #include "Utility/Vector.h"
 

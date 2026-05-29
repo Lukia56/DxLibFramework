@@ -1,13 +1,8 @@
 #include "Gamepad.h"
+#include <array>
 #include <cassert>
 #include <DxLib.h>
-
-Gamepad& Gamepad::GetInstance()
-{
-	static Gamepad instance;
-
-	return instance;
-}
+#include "Literal/InputProperty.h"
 
 void Gamepad::Update()
 {
@@ -30,6 +25,13 @@ bool Gamepad::IsDown(int keyCode, Input::PadSlot slot)
 	}
 
 	return mState[s].Buttons[keyCode];
+}
+
+Gamepad& Gamepad::GetInstance()
+{
+	static Gamepad instance;
+
+	return instance;
 }
 
 Gamepad::Gamepad() :

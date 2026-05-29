@@ -1,6 +1,7 @@
 #include "InputFormatGamepadButton.h"
 #include <DxLib.h>
 #include "../Gamepad.h"
+#include "../Literal/KeyCodes.h"
 #include "Utility/Vector.h"
 
 void InputFormatGamepadButton::Init()

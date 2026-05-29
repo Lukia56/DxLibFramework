@@ -11,11 +11,6 @@ class Gamepad
 {
 public:
 
-	/// <summary>
-	/// インスタンスの生成、取得を行う
-	/// </summary>
-	static Gamepad& GetInstance();
-
 	~Gamepad() = default;
 
 	/// <summary>
@@ -31,11 +26,20 @@ public:
 	/// <returns>押下状態</returns>
 	bool IsDown(int keyCode, Input::PadSlot slot = Input::PadSlot::Player1);
 
+public:
+
 	/// <summary>
 	/// 入力状態を取得
 	/// </summary>
 	/// <param name="slot">ゲームパッドの識別番号</param>
 	const XINPUT_STATE& GetState(Input::PadSlot slot = Input::PadSlot::Player1) const { return mState[static_cast<int>(slot)]; }
+
+public:
+
+	/// <summary>
+	/// インスタンスの生成、取得を行う
+	/// </summary>
+	static Gamepad& GetInstance();
 
 private:
 

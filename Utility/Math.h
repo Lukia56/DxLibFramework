@@ -1,6 +1,5 @@
 #pragma once
 
-#include <algorithm>
 #include <cmath>
 #include <numbers>
 #include "Vector.h"
@@ -187,7 +186,7 @@ namespace Math
 		result *= Math::Sign(axis);
 
 		// 値を-1から1に収める
-		result = Clamp(result, -1.0f, 1.0f);
+		result = Math::Clamp(result, -1.0f, 1.0f);
 
 		return result;
 	}
@@ -221,7 +220,7 @@ namespace Math
 		float rate = (len - dzMin) / (dzMax - dzMin);
 
 		// 値を0から1に収める
-		rate = Clamp(rate, 0.0f, 1.0f);
+		rate = Math::Clamp(rate, 0.0f, 1.0f);
 
 		// スケーリング
 		result = dir * (rate / len);

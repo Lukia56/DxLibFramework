@@ -2,6 +2,7 @@
 #include <DxLib.h>
 #include "Utility/Color.h"
 #include "Utility/Math.h"
+#include "Utility/Vector.h"
 
 namespace
 {

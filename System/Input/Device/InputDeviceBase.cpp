@@ -1,7 +1,10 @@
 #include "InputDeviceBase.h"
 #include <algorithm>
 #include <cmath>
+#include <memory>
+#include <unordered_map>
 #include "../Format/InputFormatBase.h"
+#include "../Literal/KeyCodes.h"
 #include "Utility/Math.h"
 #include "Utility/Vector.h"
 

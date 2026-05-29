@@ -9,9 +9,9 @@ InputModifierNegate::InputModifierNegate(bool x, bool y, bool z) :
 {
 }
 
-void InputModifierNegate::ModifyRaw(Vector3* rawValue)
+void InputModifierNegate::ModifyRaw(Vector3& rawValue)
 {
-	if (mX) rawValue->x *= -1;
-	if (mY) rawValue->y *= -1;
-	if (mZ) rawValue->z *= -1;
+	if (mX) rawValue.x *= -1;
+	if (mY) rawValue.y *= -1;
+	if (mZ) rawValue.z *= -1;
 }
