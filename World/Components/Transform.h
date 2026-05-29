@@ -16,9 +16,6 @@ public:
 
 	using GameObjectContainer = std::vector<std::unique_ptr<GameObject>>;
 
-	Transform(GameObject* owner);
-	~Transform();
-
 	/// <summary>
 	/// ローカル座標
 	/// 親からの相対座標
@@ -34,6 +31,27 @@ public:
 	/// 親からの相対スケール
 	/// </summary>
 	Vector3 localScale;
+
+public:
+
+	Transform(GameObject* owner);
+	~Transform();
+
+	/// <summary>
+	/// 座標移動
+	/// </summary>
+	void Translate(const Vector3& translation);
+
+	/// <summary>
+	/// ラジアン角で回転
+	/// </summary>
+	void Rotate(const Vector3& angle);
+
+	/// <summary>
+	/// デグリー角で回転
+	/// </summary>
+	/// <param name="angle"></param>
+	void RotateDeg(const Vector3& angle);
 
 	/// <summary>
 	/// 親トランスフォームを設定する
@@ -65,6 +83,16 @@ public:
 	Vector3 GetWorldScale() const;
 
 public:
+	
+	/// <summary>
+	/// 角度をデグリー角で取得
+	/// </summary>
+	Vector3 GetRotationAsDeg() const;
+
+	/// <summary>
+	/// 角度をデグリー角で設定
+	/// </summary>
+	void SetRotationAsDeg(const Vector3& angle);
 
 	/// <summary>
 	/// 自身の所有者のゲームオブジェクトを取得する

@@ -29,6 +29,25 @@ Transform::~Transform()
 	mOwner = nullptr;
 }
 
+void Transform::Translate(const Vector3& translation)
+{
+	localPosition += translation;
+}
+
+void Transform::Rotate(const Vector3& angle)
+{
+	localRotation += angle;
+}
+
+void Transform::RotateDeg(const Vector3& angle)
+{
+	localRotation += Vector3(
+		Math::ToRadian(angle.x),
+		Math::ToRadian(angle.y),
+		Math::ToRadian(angle.z)
+	);
+}
+
 void Transform::SetParent(Transform* newParent)
 {
 	if (!mParent)
@@ -110,4 +129,22 @@ Vector3 Transform::GetWorldScale() const
 	if (mParent) world += mParent->GetWorldScale();
 
 	return world;
+}
+
+Vector3 Transform::GetRotationAsDeg() const
+{
+	return Vector3(
+		Math::ToRadian(localRotation.x),
+		Math::ToRadian(localRotation.y),
+		Math::ToRadian(localRotation.z)
+	);
+}
+
+void Transform::SetRotationAsDeg(const Vector3& angle)
+{
+	localRotation = Vector3(
+		Math::ToRadian(angle.x),
+		Math::ToRadian(angle.y),
+		Math::ToRadian(angle.z)
+	);
 }
