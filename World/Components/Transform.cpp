@@ -54,6 +54,7 @@ void Transform::SetParent(Transform* newParent)
 	auto gameObject = std::move(*it);
 	siblings.erase(it);
 
+	// 親を設定
 	mParent = newParent;
 
 	// 新しい親に移動
@@ -71,8 +72,10 @@ void Transform::SetParent(std::unique_ptr<GameObject> gameObject, Transform* new
 		return;
 	}
 
+	// 親を設定
 	mParent = newParent;
 
+	// 新しい親に移動
 	if (mParent)
 	{
 		mParent->GetChildren().emplace_back(std::move(gameObject));
