@@ -23,8 +23,7 @@ Camera::Camera() :
 
 void Camera::Init()
 {
-	//GameObject::mTransform.Translate(Vector3(0.0f, 0.0f, -mDistanceToTarget));
-	GameObject::mTransform.localPosition += Vector3(0.0f, 0.0f, -mDistanceToTarget);
+	GameObject::mTransform.Translate(Vector3(0.0f, 0.0f, -mDistanceToTarget));
 	SetCameraPositionAndTarget_UpVecY(GameObject::mTransform.localPosition.GetAsDxLibVector(), VGet(0.0f, 0.0f, 0.0f));
 }
 
