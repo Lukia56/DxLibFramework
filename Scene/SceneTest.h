@@ -5,6 +5,7 @@
 class Camera;
 class Player;
 class Crate;
+class UI;
 
 class SceneTest : public SceneBase
 {
@@ -34,4 +35,5 @@ private:
 	Camera* mCamera;
 	Player* mPlayer;
 	Crate* mCrate;
+	UI* mUI;
 };

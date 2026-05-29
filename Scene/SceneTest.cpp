@@ -2,15 +2,18 @@
 #include "../World/Characters/Player.h"
 #include "../World/Objects/Crate.h"
 #include "../World/Others/Camera.h"
+#include "../World/Others/UI.h"
 
 SceneTest::SceneTest() :
 	mCamera(nullptr),
 	mPlayer(nullptr),
-	mCrate(nullptr)
+	mCrate(nullptr),
+	mUI(nullptr)
 {
 	auto camera = std::make_unique<Camera>();
 	auto player = std::make_unique<Player>();
 	auto crate = std::make_unique<Crate>();
+	auto ui = std::make_unique<UI>();
 
 	mCamera = camera.get();
 	Add(std::move(camera));
@@ -18,12 +21,15 @@ SceneTest::SceneTest() :
 	Add(std::move(player));
 	mCrate = crate.get();
 	Add(std::move(crate));
+	mUI = ui.get();
+	Add(std::move(ui));
 
 	mPlayer->SetCrate(mCrate);
 }
 
 SceneTest::~SceneTest()
 {
+	mUI = nullptr;
 	mCrate = nullptr;
 	mPlayer = nullptr;
 	mCamera = nullptr;
