@@ -1,4 +1,5 @@
 #include "InputModifierSwizzleAxis.h"
+#include <utility>
 #include "Utility/Vector.h"
 
 InputModifierSwizzleAxis::InputModifierSwizzleAxis(Order order) :
