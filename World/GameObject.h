@@ -46,14 +46,9 @@ public:
 public:
 
 	/// <summary>
-	/// 親オブジェクトを取得する
+	/// トランスフォームを取得する
 	/// </summary>
-	GameObject* GetParent() const { return mParent; }
-
-	/// <summary>
-	/// 子オブジェクトを取得する
-	/// </summary>
-	GameObjectContainer& GetChildren() { return mChildren; }
+	Transform& GetTransform() { return mTransform; }
 
 protected:
 
@@ -83,15 +78,5 @@ private:
 	/// 更新処理後に削除するかを判定する
 	/// </summary>
 	bool mIsCalledDestroy;
-
-	/// <summary>
-	/// 親オブジェクト
-	/// </summary>
-	GameObject* mParent;
-
-	/// <summary>
-	/// 子オブジェクト
-	/// </summary>
-	GameObjectContainer mChildren;
 };
 

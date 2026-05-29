@@ -1,72 +1,100 @@
 #pragma once
 
+#include <memory>
+#include <vector>
 #include "Utility/Math.h"
 #include "Utility/Vector.h"
 
+class GameObject;
+
 /// <summary>
-/// 位置、回転、拡縮を管理する構造体
+/// 位置、回転、拡縮とゲームオブジェクトの階層構造を管理するクラス
 /// </summary>
-struct Transform
+class Transform
 {
-	Vector3 position{ 0.0f, 0.0f, 0.0f };
-	Vector3 rotation{ 0.0f, 0.0f, 0.0f };
-	Vector3 scale{ 1.0f, 1.0f, 1.0f };
+public:
+
+	using GameObjectContainer = std::vector<std::unique_ptr<GameObject>>;
+
+	Transform(GameObject* owner);
+	~Transform();
 
 	/// <summary>
-	/// 移動
+	/// ローカル座標
+	/// 親からの相対座標
 	/// </summary>
-	/// <param name="vec">移動成分のベクトル</param>
-	void Translate(const Vector3& vec) { position += vec; }
+	Vector3 localPosition;
+	/// <summary>
+	/// ローカル角度
+	/// 親からの相対角度
+	/// </summary>
+	Vector3 localRotation;
+	/// <summary>
+	/// ローカルスケール
+	/// 親からの相対スケール
+	/// </summary>
+	Vector3 localScale;
 
 	/// <summary>
-	/// 回転 引数のベクトルはラジアン角
+	/// 親トランスフォームを設定する
+	/// すでに親が設定されている場合用
+	/// nullptrなら解放する
 	/// </summary>
-	/// <param name="vec">回転成分のベクトル</param>
-	void RotateRad(const Vector3& vec) { rotation += vec; }
+	/// <param name="newParent">新しい親トランスフォーム</param>
+	void SetParent(Transform* newParent);
 
 	/// <summary>
-	/// 回転 引き数のベクトルはデグリー角
+	/// 親トランスフォームを設定する
+	/// まだ親が設定されていない場合用
 	/// </summary>
-	/// <param name="vecDeg">回転成分のベクトル</param>
-	void RotateDeg(const Vector3& vecDeg)
-	{
-		rotation.x += Math::ToRadian(vecDeg.x);
-		rotation.y += Math::ToRadian(vecDeg.y);
-		rotation.z += Math::ToRadian(vecDeg.z);
-	}
+	void SetParent(std::unique_ptr<GameObject> gameObject, Transform* newParent);
 
 	/// <summary>
-	/// 角度を指定 引数のベクトルはデグリー角
+	/// ワールド座標を取得する
 	/// </summary>
-	/// <param name="vecDeg">回転成分のベクトル</param>
-	void SetRotateDeg(const Vector3& vecDeg)
-	{
-		rotation.x = Math::ToDegree(vecDeg.x);
-		rotation.y = Math::ToDegree(vecDeg.y);
-		rotation.z = Math::ToDegree(vecDeg.z);
-	}
+	Vector3 GetWorldPosition() const;
 
 	/// <summary>
-	/// 回転の値をデグリー角で取得 デバッグで使用する想定
+	/// ワールド角度を取得する
 	/// </summary>
-	/// <returns>デグリー角の回転成分</returns>
-	Vector3 GetRotateDeg() const
-	{
-		return
-		{
-			Math::ToDegree(rotation.x),
-			Math::ToDegree(rotation.y),
-			Math::ToDegree(rotation.z)
-		};
-	}
+	Vector3 GetWorldRotation() const;
 
 	/// <summary>
-	/// Transformを初期状態に戻す
+	/// ワールドスケールを取得する
 	/// </summary>
-	void Reset()
-	{
-		position = { 0.0f, 0.0f, 0.0f };
-		rotation = { 0.0f, 0.0f, 0.0f };
-		scale = { 1.0f, 1.0f, 1.0f };
-	}
+	Vector3 GetWorldScale() const;
+
+public:
+
+	/// <summary>
+	/// 自身の所有者のゲームオブジェクトを取得する
+	/// </summary>
+	//GameObject* GetOwner() const { return mOwner; }
+
+	/// <summary>
+	/// 親トランスフォームを取得する
+	/// </summary>
+	Transform* GetParent() const { return mParent; }
+
+	/// <summary>
+	/// 子オブジェクトを取得する
+	/// </summary>
+	GameObjectContainer& GetChildren() { return mChildren; }
+
+private:
+
+	/// <summary>
+	/// 自身の所有権を持ったオブジェクト
+	/// </summary>
+	GameObject* mOwner;
+
+	/// <summary>
+	/// 親トランスフォーム
+	/// </summary>
+	Transform* mParent;
+
+	/// <summary>
+	/// 自身の子オブジェクト
+	/// </summary>
+	GameObjectContainer mChildren;
 };

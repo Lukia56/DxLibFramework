@@ -5,55 +5,32 @@
 #include "Components/Transform.h"
 
 GameObject::GameObject() :
-	mTransform(),
-	mIsCalledDestroy(false),
-	mParent(nullptr),
-	mChildren()
+	mTransform(this),
+	mIsCalledDestroy(false)
 {
 }
 
 GameObject::~GameObject()
 {
-	// 子オブジェクトを削除する
-	while (mChildren.size() > 0)
-	{
-		auto it = mChildren.begin();
-		(*it)->Finalize();
-		mChildren.erase(it);
-	}
-
-	mParent = nullptr;
 }
 
 bool GameObject::CheckDestroy()
 {
 	// 自身のイテレータを取得してコンテナから削除する
-	if (mIsCalledDestroy && mParent)
+	if (mIsCalledDestroy && mTransform.GetParent())
 	{
 		// 終了処理を呼ぶ
 		Finalize();
 
-		auto& siblings = mParent->GetChildren();
-		auto it = std::find_if(siblings.begin(), siblings.end(),
-			[this](const std::unique_ptr<GameObject>& ptr)
-			{
-				return this == ptr.get();
-			});
-		if (it == siblings.end())
-		{
-			assert(false && "GameObject // 親オブジェクトに自身が含まれていませんでした");
-			return false;
-		}
-
-		siblings.erase(it);
+		mTransform.SetParent(nullptr);
 
 		return true;
 	}
 
 	// 子オブジェクトについて再帰
-	for (auto i = 0; i < mChildren.size();)
+	for (int i = 0; i < mTransform.GetChildren().size();)
 	{
-		if (mChildren[i]->CheckDestroy()) continue;
+		if (mTransform.GetChildren()[i]->CheckDestroy()) continue;
 
 		i++;
 	}
@@ -63,9 +40,9 @@ bool GameObject::CheckDestroy()
 
 void GameObject::Add(std::unique_ptr<GameObject> gameObject)
 {
-	gameObject->Init();
-	gameObject->mParent = this;
-	mChildren.emplace_back(std::move(gameObject));
+	GameObject* ptr = gameObject.get();
+	ptr->Init();
+	ptr->GetTransform().SetParent(std::move(gameObject), &mTransform);
 }
 
 void GameObject::Destroy(GameObject* gameObject)

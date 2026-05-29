@@ -43,7 +43,7 @@ void SceneBase::Update(GameObject* gameObject)
 	gameObject->Update();
 
 	// 子オブジェクトについて再帰
-	for (const auto& it : gameObject->GetChildren())
+	for (const auto& it : gameObject->GetTransform().GetChildren())
 	{
 		Update(it.get());
 	}
@@ -54,7 +54,7 @@ void SceneBase::Draw(GameObject* gameObject)
 	gameObject->Draw();
 
 	// 子オブジェクトについて再帰
-	for (const auto& it : gameObject->GetChildren())
+	for (const auto& it : gameObject->GetTransform().GetChildren())
 	{
 		Draw(it.get());
 	}
