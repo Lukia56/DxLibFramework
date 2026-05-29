@@ -2,10 +2,10 @@
 #include <cassert>
 #include <memory>
 #include <DxLib.h>
+#include "../Components/Collision3D.h"
 #include "../Objects/Ball.h"
 #include "../Objects/Bullet.h"
 #include "../Objects/Crate.h"
-#include "../Components/Collision3D.h"
 #include "System/InputManager.h"
 
 namespace
@@ -41,31 +41,31 @@ void Player::Finalize()
 
 void Player::Update()
 {
-	GameObject::mTransform.position += InputManager::GetInstance().GetAsVector3(Input::Action::Move) * kSpeed;
-	mCollider->SetPosition(mTransform.position);
+	GameObject::mTransform.localPosition += InputManager::GetInstance().GetAsVector3(Input::Action::Move) * kSpeed;
+	mCollider->SetPosition(mTransform.GetWorldPosition());
 }
 
 void Player::Draw()
 {
 	mCollider->DebugDraw();
-
-	Collision3D::Result result;
-	result = mCollider->CheckCollision(mCrate->GetColiider());
-	if (result.isHit)
-	{
-		printfDx("AABB vs AABB | è’ìÀÇµÇƒÇ¢ÇÈ\n");
-		printfDx("Result.penetration = %f\n", result.penetration);
-		printfDx("Result.normal.x = %f\n", result.normal.x);
-		printfDx("Result.normal.y = %f\n", result.normal.y);
-		printfDx("Result.normal.z = %f\n", result.normal.z);
-	}
-	result = mCollider->CheckCollision(mBall->GetColiider());
-	if (result.isHit)
-	{
-		printfDx("AABB vs Sphere | è’ìÀÇµÇƒÇ¢ÇÈ\n");
-		printfDx("Result.penetration = %f\n", result.penetration);
-		printfDx("Result.normal.x = %f\n", result.normal.x);
-		printfDx("Result.normal.y = %f\n", result.normal.y);
-		printfDx("Result.normal.z = %f\n", result.normal.z);
-	}
+	
+	//Collision3D::Result result;
+	//result = mCollider->CheckCollision(mCrate->GetColiider());
+	//if (result.isHit)
+	//{
+	//	printfDx("AABB vs AABB | è’ìÀÇµÇƒÇ¢ÇÈ\n");
+	//	printfDx("Result.penetration = %f\n", result.penetration);
+	//	printfDx("Result.normal.x = %f\n", result.normal.x);
+	//	printfDx("Result.normal.y = %f\n", result.normal.y);
+	//	printfDx("Result.normal.z = %f\n", result.normal.z);
+	//}
+	//result = mCollider->CheckCollision(mBall->GetColiider());
+	//if (result.isHit)
+	//{
+	//	printfDx("AABB vs Sphere | è’ìÀÇµÇƒÇ¢ÇÈ\n");
+	//	printfDx("Result.penetration = %f\n", result.penetration);
+	//	printfDx("Result.normal.x = %f\n", result.normal.x);
+	//	printfDx("Result.normal.y = %f\n", result.normal.y);
+	//	printfDx("Result.normal.z = %f\n", result.normal.z);
+	//}
 }
