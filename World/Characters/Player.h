@@ -2,6 +2,7 @@
 
 #include "../GameObject.h"
 
+class Model;
 class Crate;
 class Ball;
 
@@ -32,6 +33,8 @@ public:
 	void SetBall(Ball* ball) { mBall = ball; }
 
 private:
+
+	std::unique_ptr<Model> mModel;
 
 	std::unique_ptr<Collision3D::AABB3D> mCollider;
 

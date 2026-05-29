@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="World\Components\Model.cpp" />
     <ClCompile Include="World\Components\Transform.cpp" />
     <ClCompile Include="World\Others\Camera.cpp" />
     <ClCompile Include="World\Objects\Ball.cpp" />
@@ -178,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="World\Components\Model.h" />
     <ClInclude Include="World\Components\Transform.h" />
     <ClInclude Include="World\Others\Camera.h" />
     <ClInclude Include="World\Objects\Ball.h" />
