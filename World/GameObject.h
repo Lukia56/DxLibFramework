@@ -55,7 +55,11 @@ protected:
 	/// <summary>
 	/// 子オブジェクトに追加する
 	/// </summary>
-	void Add(std::unique_ptr<GameObject> gameObject);
+	/// <param name="gameObject">追加するゲームオブジェクトのスマートポインタ</param>
+	/// <returns>追加したゲームオブジェクトの生ポインタ</returns>
+	template <class T>
+	requires std::derived_from<T, GameObject>
+	T* Add(std::unique_ptr<T> gameObject);
 
 	/// <summary>
 	/// ゲームオブジェクトを削除する
@@ -80,3 +84,12 @@ private:
 	bool mIsCalledDestroy;
 };
 
+template <class T>
+requires std::derived_from<T, GameObject>
+inline T* GameObject::Add(std::unique_ptr<T> gameObject)
+{
+	T* ptr = gameObject.get();
+	ptr->Init();
+	ptr->GetTransform().SetParent(std::move(gameObject), &mTransform);
+	return ptr;
+}

@@ -59,9 +59,3 @@ void SceneBase::Draw(GameObject* gameObject)
 		Draw(it.get());
 	}
 }
-
-void SceneBase::Add(std::unique_ptr<GameObject> gameObject)
-{
-	gameObject->Init();
-	mRootObjects.emplace_back(std::move(gameObject));
-}

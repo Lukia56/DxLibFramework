@@ -49,7 +49,11 @@ protected:
 	/// <summary>
 	/// ルートオブジェクトに追加する
 	/// </summary>
-	void Add(std::unique_ptr<GameObject> gameObject);
+	/// <param name="gameObject">追加するルートオブジェクトのスマートポインタ</param>
+	/// <returns>追加したルートオブジェクトの生ポインタ</returns>
+	template <class T>
+	requires std::derived_from<T, GameObject>
+	T* Add(std::unique_ptr<T> gameObject);
 
 private:
 
@@ -70,3 +74,13 @@ private:
 	/// </summary>
 	GameObjectContainer mRootObjects;
 };
+
+template <class T>
+requires std::derived_from<T, GameObject>
+inline T* SceneBase::Add(std::unique_ptr<T> gameObject)
+{
+	T* ptr = gameObject.get();
+	ptr->Init();
+	mRootObjects.emplace_back(std::move(gameObject));
+	return ptr;
+}

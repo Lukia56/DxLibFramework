@@ -38,13 +38,6 @@ bool GameObject::CheckDestroy()
 	return false;
 }
 
-void GameObject::Add(std::unique_ptr<GameObject> gameObject)
-{
-	GameObject* ptr = gameObject.get();
-	ptr->Init();
-	ptr->GetTransform().SetParent(std::move(gameObject), &mTransform);
-}
-
 void GameObject::Destroy(GameObject* gameObject)
 {
 	if (gameObject == nullptr)
