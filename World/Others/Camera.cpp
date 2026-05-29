@@ -23,9 +23,9 @@ Camera::Camera() :
 
 void Camera::Init()
 {
-	//mTransform.Translate(Vector3(0.0f, 0.0f, -mDistanceToTarget));
-	mTransform.localPosition += Vector3(0.0f, 0.0f, -mDistanceToTarget);
-	SetCameraPositionAndTarget_UpVecY(mTransform.localPosition.GetAsDxLibVector(), VGet(0.0f, 0.0f, 0.0f));
+	//GameObject::mTransform.Translate(Vector3(0.0f, 0.0f, -mDistanceToTarget));
+	GameObject::mTransform.localPosition += Vector3(0.0f, 0.0f, -mDistanceToTarget);
+	SetCameraPositionAndTarget_UpVecY(GameObject::mTransform.localPosition.GetAsDxLibVector(), VGet(0.0f, 0.0f, 0.0f));
 }
 
 void Camera::Update()
@@ -35,7 +35,7 @@ void Camera::Update()
 
 	if (mTarget)
 	{
-		VECTOR cameraPos = (mTransform.localPosition + mOffsetPos).GetAsDxLibVector();
+		VECTOR cameraPos = (GameObject::mTransform.localPosition + mOffsetPos).GetAsDxLibVector();
 		VECTOR targetPos = mTarget->localPosition.GetAsDxLibVector();
 		SetCameraPositionAndTarget_UpVecY(cameraPos, targetPos);
 	}
