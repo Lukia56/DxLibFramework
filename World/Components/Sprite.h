@@ -33,9 +33,9 @@ private:
 	int mHandle;
 
 	/// <summary>
-	/// 画像のサイズ
+	/// 画像のサイズの半径
 	/// </summary>
-	Vector2 mSize;
+	Vector2 mHalfSize;
 
 	/// <summary>
 	/// 自身を所有するゲームオブジェクト

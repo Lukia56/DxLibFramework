@@ -4,7 +4,7 @@
 
 Sprite::Sprite(GameObject* owner) :
 	mHandle(-1),
-	mSize(Vector2::One),
+	mHalfSize(Vector2::One),
 	mOwner(owner)
 {
 }
@@ -19,7 +19,9 @@ void Sprite::Load(const char* const filePath)
 {
 	mHandle = LoadGraph(filePath);
 
-	GetGraphSizeF(mHandle, &mSize.x, &mSize.y);
+	// ‰æ‘œ‚Ì”¼Œa‚ðŽæ“¾
+	GetGraphSizeF(mHandle, &mHalfSize.x, &mHalfSize.y);
+	mHalfSize *= 0.5f;
 }
 
 void Sprite::Draw()
@@ -34,5 +36,5 @@ void Sprite::Draw()
 	MV1SetRotationXYZ(mHandle, rot);
 	MV1SetScale(mHandle, scale);
 
-	DrawRotaGraphFast3F(pos.x, pos.y, mSize.x * 0.5f, mSize.y * 0.5f, scale.x, scale.y, rot.z, mHandle, true);
+	DrawRotaGraphFast3F(pos.x, pos.y, mHalfSize.x, mHalfSize.y, scale.x, scale.y, rot.z, mHandle, true);
 }
