@@ -85,7 +85,7 @@ namespace Collision3D
 
 	void Sphere3D::DebugDraw() const
 	{
-		DrawSphere3D(mCenterPos.GetAsDxLibVector(), mRadius, 10, Color::kWhite, Color::kWhite, false);
+		DrawSphere3D(mCenterPos.GetAsDxLibVector(), mRadius, 10, Color::white.GetAsHexRGB(), Color::white.GetAsHexRGB(), false);
 	}
 
 	Collision3D::Result Sphere3D::Check(const Sphere3D* other) const
@@ -121,6 +121,11 @@ namespace Collision3D
 		return result;
 	}
 
+	Collision3D::Result Sphere3D::Check(const Capsule3D* other) const
+	{
+		return Collision3D::Result();
+	}
+
 	// AABB
 
 	void AABB3D::DebugDraw() const
@@ -128,7 +133,7 @@ namespace Collision3D
 		Vector3 minPos = this->GetPosition() - this->GetHalfSize();
 		Vector3 maxPos = this->GetPosition() + this->GetHalfSize();
 
-		DrawCube3D(minPos.GetAsDxLibVector(), maxPos.GetAsDxLibVector(), Color::kWhite, Color::kWhite, false);
+		DrawCube3D(minPos.GetAsDxLibVector(), maxPos.GetAsDxLibVector(), Color::white.GetAsHexRGB(), Color::white.GetAsHexRGB(), false);
 	}
 
 	Collision3D::Result AABB3D::Check(const Sphere3D* other) const
@@ -195,5 +200,29 @@ namespace Collision3D
 		}
 
 		return result;
+	}
+
+	Collision3D::Result AABB3D::Check(const Capsule3D* other) const
+	{
+		return Collision3D::Result();
+	}
+
+	void Capsule3D::DebugDraw() const
+	{
+	}
+
+	Collision3D::Result Capsule3D::Check(const Sphere3D* other) const
+	{
+		return Collision3D::Result();
+	}
+
+	Collision3D::Result Capsule3D::Check(const AABB3D* other) const
+	{
+		return Collision3D::Result();
+	}
+
+	Collision3D::Result Capsule3D::Check(const Capsule3D* other) const
+	{
+		return Collision3D::Result();
 	}
 }

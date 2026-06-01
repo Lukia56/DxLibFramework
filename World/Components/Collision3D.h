@@ -28,6 +28,7 @@ namespace Collision3D
 	// ダブルディスパッチ用に前方宣言
 	class Sphere3D;
 	class AABB3D;
+	class Capsule3D;
 
 	/// <summary>
 	/// 衝突判定の3Dコライダのインターフェース
@@ -62,6 +63,8 @@ namespace Collision3D
 		virtual Collision3D::Result Check(const Sphere3D* other) const = 0;
 		friend AABB3D;
 		virtual Collision3D::Result Check(const AABB3D* other) const = 0;
+		friend Capsule3D;
+		virtual Collision3D::Result Check(const Capsule3D* other) const = 0;
 	};
 
 	/// <summary>
@@ -105,6 +108,11 @@ namespace Collision3D
 		/// 球 vs AABBの衝突判定
 		/// </summary>
 		Collision3D::Result Check(const AABB3D* other) const override;
+
+		/// <summary>
+		/// 球 vs カプセルの衝突判定
+		/// </summary>
+		Collision3D::Result Check(const Capsule3D* other) const override;
 
 	private:
 		
@@ -155,10 +163,56 @@ namespace Collision3D
 		/// </summary>
 		Collision3D::Result Check(const AABB3D* other) const override;
 
+		/// <summary>
+		/// AABB vs カプセルの衝突判定
+		/// </summary>
+		Collision3D::Result Check(const Capsule3D* other) const override;
+
 	private:
 
 		Vector3 mCenterPos;
 
 		Vector3 mHalfSize;
+	};
+
+	class Capsule3D : public ICollider3D
+	{
+	public:
+
+		Capsule3D() = default;
+		~Capsule3D() = default;
+
+		/// <summary>
+		/// 衝突しているか調べる
+		/// </summary>
+		/// <param name="other">衝突判定を調べるコライダー</param>
+		/// <returns>衝突情報</returns>
+		Collision3D::Result CheckCollision(const ICollider3D* other) const override { return other->Check(this); }
+
+		/// <summary>
+		/// 形状のデバッグ描画
+		/// </summary>
+		void DebugDraw() const override;
+
+	protected:
+
+		/// <summary>
+		/// AABB vs 球の衝突判定
+		/// </summary>
+		Collision3D::Result Check(const Sphere3D* other) const override;
+
+		/// <summary>
+		/// AABB vs AABBの衝突判定
+		/// </summary>
+		Collision3D::Result Check(const AABB3D* other) const override;
+
+		/// <summary>
+		/// カプセル vs カプセルの衝突判定
+		/// </summary>
+		Collision3D::Result Check(const Capsule3D* other) const override;
+
+	private:
+
+
 	};
 }
