@@ -4,6 +4,7 @@
 #include <DxLib.h>
 #include "Scene/SceneManager.h"
 #include "System/InputManager.h"
+#include "System/ResourceManager.h"
 #include "Utility/Random.h"
 
 Application::Application()
@@ -40,6 +41,8 @@ bool Application::Initialize()
 	// 入力マネージャーを初期化
 	InputManager::GetInstance().Initialize();
 
+	ResourceManager::GetInstance().Init();
+
 	// 乱数生成機を初期化
 	Random::Init();
 
@@ -49,6 +52,8 @@ bool Application::Initialize()
 
 void Application::Finalize()
 {
+	ResourceManager::GetInstance().Finalize();
+
 	// メンバの後処理
 	mSceneManager->Finalize();
 

@@ -3,6 +3,7 @@
 #include "Utility/Vector.h"
 
 class GameObject;
+class Resource;
 
 /// <summary>
 /// スプライトの管理をするクラス
@@ -27,10 +28,7 @@ public:
 
 private:
 
-	/// <summary>
-	/// モデルハンドル
-	/// </summary>
-	int mHandle;
+	Resource* mTexture;
 
 	/// <summary>
 	/// 画像のサイズの半径

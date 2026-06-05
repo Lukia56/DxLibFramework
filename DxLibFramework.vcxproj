@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="System\ResourceManager.cpp" />
+    <ClCompile Include="System\Resource\Resource.cpp" />
     <ClCompile Include="Utility\Color.cpp" />
     <ClCompile Include="World\Components\Sprite.cpp" />
     <ClCompile Include="World\Others\UI.cpp" />
@@ -182,6 +184,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="System\ResourceManager.h" />
+    <ClInclude Include="System\Resource\Resource.h" />
     <ClInclude Include="World\Components\Sprite.h" />
     <ClInclude Include="World\Others\UI.h" />
     <ClInclude Include="World\Components\Model.h" />
