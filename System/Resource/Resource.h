@@ -36,3 +36,22 @@ private:
 
 	int mHandle;
 };
+
+/// <summary>
+/// ƒ‚ƒfƒ‹‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+/// </summary>
+class Model : public Resource
+{
+public:
+
+	Model(int handle) : mHandle(handle) {}
+	~Model() = default;
+
+	void Delete() override;
+
+	int GetHandle() const override { return mHandle; }
+
+private:
+
+	int mHandle;
+};

@@ -28,8 +28,14 @@ public:
 	/// 初回呼び出し時は読み込んで取得
 	/// 2回目以降は取得のみ
 	/// </summary>
-	/// <returns>画像ハンドル</returns>
 	Resource* GetImage(const std::string& path);
+
+	/// <summary>
+	/// モデルを取得する
+	/// 初回呼び出し時は読み込んで取得
+	/// 2回目以降は取得のみ
+	/// </summary>
+	Resource* GetModel(const std::string& path);
 
 	void ReleaseAll();
 

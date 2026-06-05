@@ -5,3 +5,8 @@ void Texture::Delete()
 {
 	DeleteGraph(mHandle);
 }
+
+void Model::Delete()
+{
+	MV1DeleteModel(mHandle);
+}
