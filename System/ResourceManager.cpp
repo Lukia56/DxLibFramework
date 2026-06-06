@@ -33,7 +33,7 @@ Resource* ResourceManager::GetModel(const std::string& path)
 	// ‰‰ñ“Ç‚İ‚İ
 	if (!mResources.contains(path))
 	{
-		int handle = LoadGraph(path.c_str());
+		int handle = MV1LoadModel(path.c_str());
 		auto resource = std::make_unique<Model>(handle);
 		Resource* ptr = resource.get();
 
