@@ -28,14 +28,9 @@ public:
 	/// ‰‰ñŒÄ‚Ño‚µ‚Í“Ç‚İ‚ñ‚Åæ“¾
 	/// 2‰ñ–ÚˆÈ~‚Íæ“¾‚Ì‚İ
 	/// </summary>
-	Resource* GetImage(const std::string& path);
-
-	/// <summary>
-	/// ƒ‚ƒfƒ‹‚ğæ“¾‚·‚é
-	/// ‰‰ñŒÄ‚Ño‚µ‚Í“Ç‚İ‚ñ‚Åæ“¾
-	/// 2‰ñ–ÚˆÈ~‚Íæ“¾‚Ì‚İ
-	/// </summary>
-	Resource* GetModel(const std::string& path);
+	template <class T>
+	requires std::derived_from<T, Resource>
+	Resource* GetResource(const std::string& path);
 
 	void ReleaseAll();
 
@@ -45,3 +40,22 @@ private:
 
 	std::unordered_map<std::string, std::unique_ptr<Resource>> mResources;
 };
+
+template<class T>
+requires std::derived_from<T, Resource>
+inline Resource* ResourceManager::GetResource(const std::string& path)
+{
+	// ‰‰ñ“Ç‚İ‚İ
+	if (!mResources.contains(path))
+	{
+		std::unique_ptr<Resource> resource = std::make_unique<T>();
+		resource->Load(path);
+		Resource* ptr = resource.get();
+
+		mResources.emplace(path, std::move(resource));
+
+		return ptr;
+	}
+
+	return mResources.at(path).get();
+}

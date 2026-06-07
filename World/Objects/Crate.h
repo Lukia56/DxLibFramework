@@ -1,7 +1,7 @@
 #pragma once
 #include "../GameObject.h"
 
-class Model;
+class ModelRenderer;
 
 namespace Collision3D
 {
@@ -28,7 +28,7 @@ public:
 
 private:
 
-	std::unique_ptr<Model> mModel;
+	std::unique_ptr<ModelRenderer> mModel;
 
 	std::unique_ptr<Collision3D::AABB3D> mCollider;
 };

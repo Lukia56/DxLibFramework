@@ -2,7 +2,7 @@
 
 #include "../GameObject.h"
 
-class Model;
+class ModelRenderer;
 class Crate;
 class Ball;
 
@@ -34,7 +34,7 @@ public:
 
 private:
 
-	std::unique_ptr<Model> mModel;
+	std::unique_ptr<ModelRenderer> mModel;
 
 	std::unique_ptr<Collision3D::AABB3D> mCollider;
 

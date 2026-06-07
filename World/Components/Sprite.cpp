@@ -18,7 +18,7 @@ Sprite::~Sprite()
 
 void Sprite::Load(const char* const filePath)
 {
-	mTexture = ResourceManager::GetInstance().GetImage(filePath);
+	mTexture = ResourceManager::GetInstance().GetResource<Texture>(filePath);
 
 	if (!mTexture) return;
 

@@ -19,6 +19,7 @@ void SceneManager::Initialize()
 void SceneManager::Finalize()
 {
 	mCurrentScene->Finalize();
+	mCurrentScene.reset();
 }
 
 void SceneManager::Update()

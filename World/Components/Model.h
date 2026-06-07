@@ -5,12 +5,12 @@ class GameObject;
 /// <summary>
 /// モデルの管理をするクラス
 /// </summary>
-class Model
+class ModelRenderer
 {
 public:
 
-	Model(GameObject* owner);
-	~Model();
+	ModelRenderer(GameObject* owner);
+	~ModelRenderer();
 
 	/// <summary>
 	/// モデルの読み込み

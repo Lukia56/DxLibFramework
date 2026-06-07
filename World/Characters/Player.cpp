@@ -17,7 +17,7 @@ namespace
 
 	constexpr Vector3 kCollisionSize{ 40.0f, 40.0f, 40.0f };
 
-	const char* const kModelHandlePath = "Resource\\Model\\Bee.mv1";
+	const char* const kModelHandlePath = "Resource\\ModelRenderer\\Bee.mv1";
 }
 
 Player::Player() :
@@ -26,7 +26,7 @@ Player::Player() :
 	mCrate(nullptr),
 	mBall(nullptr)
 {
-	mModel = std::make_unique<Model>(this);
+	mModel = std::make_unique<ModelRenderer>(this);
 	mCollider = std::make_unique<Collision3D::AABB3D>(Vector3::Zero, kCollisionSize);
 }
 

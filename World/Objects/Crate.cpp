@@ -10,14 +10,14 @@ namespace
 
 	constexpr Vector3 kCollisionSize{ 50.0f, 50.0f, 50.0f };
 
-	const char* const kModelHandlePath = "Resource\\Model\\Cube_Crate.mv1";
+	const char* const kModelHandlePath = "Resource\\ModelRenderer\\Cube_Crate.mv1";
 }
 
 Crate::Crate() :
 	mModel(nullptr),
 	mCollider(nullptr)
 {
-	mModel = std::make_unique<Model>(this);
+	mModel = std::make_unique<ModelRenderer>(this);
 	mCollider = std::make_unique<Collision3D::AABB3D>(Vector3::Zero, kCollisionSize);
 }
 

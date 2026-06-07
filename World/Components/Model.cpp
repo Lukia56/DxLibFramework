@@ -2,24 +2,24 @@
 #include <DxLib.h>
 #include "../GameObject.h"
 
-Model::Model(GameObject* owner) :
+ModelRenderer::ModelRenderer(GameObject* owner) :
 	mHandle(-1),
 	mOwner(owner)
 {
 }
 
-Model::~Model()
+ModelRenderer::~ModelRenderer()
 {
 	// ƒ‚ƒfƒ‹‚ð‰ð•ú‚·‚é
 	if (mHandle != -1) DeleteGraph(mHandle);
 }
 
-void Model::Load(const char* const filePath)
+void ModelRenderer::Load(const char* const filePath)
 {
 	mHandle = MV1LoadModel(filePath);
 }
 
-void Model::Draw()
+void ModelRenderer::Draw()
 {
 	if (mHandle == -1) return;
 

@@ -1,5 +1,9 @@
 #pragma once
 
+#include <string>
+
+class ResourceManager;
+
 /// <summary>
 /// リソース系クラスの基底
 /// </summary>
@@ -7,15 +11,28 @@ class Resource
 {
 public:
 
-	Resource() = default;
+	Resource() : mHandle(-1) {};
 	virtual ~Resource() = default;
+
+	virtual int GetHandle() const { return mHandle; };
+
+protected:
+
+	int mHandle;
+
+private:
+
+	friend ResourceManager;
+	
+	/// <summary>
+	/// 読み込み処理がリソースごとに違うため純粋仮想化
+	/// </summary>
+	virtual void Load(const std::string& path) = 0;
 
 	/// <summary>
 	/// 解放処理がリソースごとに違うため純粋仮想化
 	/// </summary>
 	virtual void Delete() = 0;
-
-	virtual int GetHandle() const = 0;
 };
 
 /// <summary>
@@ -25,16 +42,14 @@ class Texture : public Resource
 {
 public:
 
-	Texture(int handle) : mHandle(handle) {}
+	Texture() = default;
 	~Texture() = default;
-
-	void Delete() override;
-
-	int GetHandle() const override { return mHandle; }
 
 private:
 
-	int mHandle;
+	void Load(const std::string& path) override;
+
+	void Delete() override;
 };
 
 /// <summary>
@@ -44,14 +59,12 @@ class Model : public Resource
 {
 public:
 
-	Model(int handle) : mHandle(handle) {}
+	Model() = default;
 	~Model() = default;
-
-	void Delete() override;
-
-	int GetHandle() const override { return mHandle; }
 
 private:
 
-	int mHandle;
+	void Load(const std::string& path) override;
+
+	void Delete() override;
 };
