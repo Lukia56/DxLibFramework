@@ -1,35 +1,38 @@
-#include "Model.h"
+#include "ModelRenderer.h"
 #include <DxLib.h>
 #include "../GameObject.h"
+#include "System/ResourceManager.h"
+#include "System/Resource/Resource.h"
 
 ModelRenderer::ModelRenderer(GameObject* owner) :
-	mHandle(-1),
+	mModel(nullptr),
 	mOwner(owner)
 {
 }
 
 ModelRenderer::~ModelRenderer()
 {
-	// ƒ‚ƒfƒ‹‚ð‰ð•ú‚·‚é
-	if (mHandle != -1) DeleteGraph(mHandle);
+	mModel = nullptr;
 }
 
 void ModelRenderer::Load(const char* const filePath)
 {
-	mHandle = MV1LoadModel(filePath);
+	mModel = ResourceManager::GetInstance().GetResource<Model>(filePath);
 }
 
 void ModelRenderer::Draw()
 {
-	if (mHandle == -1) return;
+	if (!mModel) return;
 
 	const VECTOR pos = mOwner->GetTransform().GetWorldPosition().GetAsDxLibVector();
 	const VECTOR rot = mOwner->GetTransform().GetWorldRotation().GetAsDxLibVector();
 	const VECTOR scale = mOwner->GetTransform().GetWorldScale().GetAsDxLibVector();
 
-	MV1SetPosition(mHandle, pos);
-	MV1SetRotationXYZ(mHandle, rot);
-	MV1SetScale(mHandle, scale);
+	int handle = mModel->GetHandle();
 
-	MV1DrawModel(mHandle);
+	MV1SetPosition(handle, pos);
+	MV1SetRotationXYZ(handle, rot);
+	MV1SetScale(handle, scale);
+
+	MV1DrawModel(handle);
 }

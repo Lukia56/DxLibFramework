@@ -1,22 +1,22 @@
-#include "Sprite.h"
+#include "SpriteRenderer.h"
 #include <DxLib.h>
 #include "../GameObject.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Resource.h"
 
-Sprite::Sprite(GameObject* owner) :
+SpriteRenderer::SpriteRenderer(GameObject* owner) :
 	mTexture(nullptr),
 	mHalfSize(Vector2::One),
 	mOwner(owner)
 {
 }
 
-Sprite::~Sprite()
+SpriteRenderer::~SpriteRenderer()
 {
 	mTexture = nullptr;
 }
 
-void Sprite::Load(const char* const filePath)
+void SpriteRenderer::Load(const char* const filePath)
 {
 	mTexture = ResourceManager::GetInstance().GetResource<Texture>(filePath);
 
@@ -27,7 +27,7 @@ void Sprite::Load(const char* const filePath)
 	mHalfSize *= 0.5f;
 }
 
-void Sprite::Draw()
+void SpriteRenderer::Draw()
 {
 	if (!mTexture) return;
 

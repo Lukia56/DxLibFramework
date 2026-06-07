@@ -3,7 +3,7 @@
 #include <memory>
 #include <DxLib.h>
 #include "../Components/Collision3D.h"
-#include "../Components/Model.h"
+#include "../Components/ModelRenderer.h"
 #include "../Objects/Ball.h"
 #include "../Objects/Bullet.h"
 #include "../Objects/Crate.h"
@@ -17,7 +17,7 @@ namespace
 
 	constexpr Vector3 kCollisionSize{ 40.0f, 40.0f, 40.0f };
 
-	const char* const kModelHandlePath = "Resource\\ModelRenderer\\Bee.mv1";
+	const char* const kModelHandlePath = "Resource\\Model\\Bee.mv1";
 }
 
 Player::Player() :

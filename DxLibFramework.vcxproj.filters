@@ -123,13 +123,13 @@
     <ClCompile Include="World\Components\Transform.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="World\Components\Model.cpp">
+    <ClCompile Include="World\Components\ModelRenderer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="World\Others\UI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="World\Components\Sprite.cpp">
+    <ClCompile Include="World\Components\SpriteRenderer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Utility\Color.cpp">
@@ -266,13 +266,13 @@
     <ClInclude Include="World\Components\Transform.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="World\Components\Model.h">
+    <ClInclude Include="World\Components\ModelRenderer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="World\Others\UI.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="World\Components\Sprite.h">
+    <ClInclude Include="World\Components\SpriteRenderer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="System\ResourceManager.h">

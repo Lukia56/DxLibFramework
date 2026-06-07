@@ -1,19 +1,17 @@
 #pragma once
 
-#include "Utility/Vector.h"
-
 class GameObject;
 class Resource;
 
 /// <summary>
-/// スプライトの管理をするクラス
+/// モデル描画の管理をするクラス
 /// </summary>
-class Sprite
+class ModelRenderer
 {
 public:
 
-	Sprite(GameObject* owner);
-	~Sprite();
+	ModelRenderer(GameObject* owner);
+	~ModelRenderer();
 
 	/// <summary>
 	/// モデルの読み込み
@@ -28,16 +26,13 @@ public:
 
 private:
 
-	Resource* mTexture;
-
 	/// <summary>
-	/// 画像のサイズの半径
+	/// モデルハンドル
 	/// </summary>
-	Vector2 mHalfSize;
+	Resource* mModel;
 
 	/// <summary>
 	/// 自身を所有するゲームオブジェクト
 	/// </summary>
 	GameObject* mOwner;
 };
-

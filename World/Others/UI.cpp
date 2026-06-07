@@ -1,6 +1,6 @@
 #include "UI.h"
 #include <DxLib.h>
-#include "../Components/Sprite.h"
+#include "../Components/SpriteRenderer.h"
 
 namespace
 {
@@ -11,7 +11,7 @@ UI::UI() :
 	mGraphHandle(-1),
 	mSprite(nullptr)
 {
-	mSprite = std::make_unique<Sprite>(this);
+	mSprite = std::make_unique<SpriteRenderer>(this);
 }
 
 UI::~UI()

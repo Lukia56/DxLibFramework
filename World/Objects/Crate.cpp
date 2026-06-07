@@ -2,7 +2,7 @@
 #include <memory>
 #include <DxLib.h>
 #include "../Components/Collision3D.h"
-#include "../Components/Model.h"
+#include "../Components/ModelRenderer.h"
 
 namespace
 {
@@ -10,7 +10,7 @@ namespace
 
 	constexpr Vector3 kCollisionSize{ 50.0f, 50.0f, 50.0f };
 
-	const char* const kModelHandlePath = "Resource\\ModelRenderer\\Cube_Crate.mv1";
+	const char* const kModelHandlePath = "Resource\\Model\\Cube_Crate.mv1";
 }
 
 Crate::Crate() :

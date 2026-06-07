@@ -2,7 +2,7 @@
 
 #include "../GameObject.h"
 
-class Sprite;
+class SpriteRenderer;
 
 class UI : public GameObject
 {
@@ -21,6 +21,6 @@ private:
 
 	int mGraphHandle;
 
-	std::unique_ptr<Sprite> mSprite;
+	std::unique_ptr<SpriteRenderer> mSprite;
 };
 

@@ -143,9 +143,9 @@
     <ClCompile Include="System\ResourceManager.cpp" />
     <ClCompile Include="System\Resource\Resource.cpp" />
     <ClCompile Include="Utility\Color.cpp" />
-    <ClCompile Include="World\Components\Sprite.cpp" />
+    <ClCompile Include="World\Components\SpriteRenderer.cpp" />
     <ClCompile Include="World\Others\UI.cpp" />
-    <ClCompile Include="World\Components\Model.cpp" />
+    <ClCompile Include="World\Components\ModelRenderer.cpp" />
     <ClCompile Include="World\Components\Transform.cpp" />
     <ClCompile Include="World\Others\Camera.cpp" />
     <ClCompile Include="World\Objects\Ball.cpp" />
@@ -186,9 +186,9 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="System\ResourceManager.h" />
     <ClInclude Include="System\Resource\Resource.h" />
-    <ClInclude Include="World\Components\Sprite.h" />
+    <ClInclude Include="World\Components\SpriteRenderer.h" />
     <ClInclude Include="World\Others\UI.h" />
-    <ClInclude Include="World\Components\Model.h" />
+    <ClInclude Include="World\Components\ModelRenderer.h" />
     <ClInclude Include="World\Components\Transform.h" />
     <ClInclude Include="World\Others\Camera.h" />
     <ClInclude Include="World\Objects\Ball.h" />
