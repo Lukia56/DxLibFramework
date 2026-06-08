@@ -2,9 +2,11 @@
 #include <DxLib.h>
 #include "../ResourceManager.h"
 
-void Texture::Load(const std::string& path)
+bool Texture::Load(const std::string& path)
 {
 	mHandle = LoadGraph(path.c_str());
+
+	return mHandle != -1;
 }
 
 void Texture::Delete()
@@ -12,9 +14,11 @@ void Texture::Delete()
 	DeleteGraph(mHandle);
 }
 
-void Model::Load(const std::string& path)
+bool Model::Load(const std::string& path)
 {
 	mHandle = MV1LoadModel(path.c_str());
+
+	return mHandle != -1;
 }
 
 void Model::Delete()
@@ -22,9 +26,11 @@ void Model::Delete()
 	MV1DeleteModel(mHandle);
 }
 
-void Sound::Load(const std::string& path)
+bool Sound::Load(const std::string& path)
 {
 	mHandle = LoadSoundMem(path.c_str());
+
+	return mHandle != -1;
 }
 
 void Sound::Delete()
@@ -32,9 +38,11 @@ void Sound::Delete()
 	DeleteSoundMem(mHandle);
 }
 
-void Font::Load(const std::string& path)
+bool Font::Load(const std::string& path)
 {
 	mHandle = LoadFontDataToHandle(path.c_str());
+
+	return mHandle != -1;
 }
 
 void Font::Delete()

@@ -27,7 +27,7 @@ private:
 	/// <summary>
 	/// 読み込み処理がリソースごとに違うため純粋仮想化
 	/// </summary>
-	virtual void Load(const std::string& path) = 0;
+	virtual bool Load(const std::string& path) = 0;
 
 	/// <summary>
 	/// 解放処理がリソースごとに違うため純粋仮想化
@@ -47,7 +47,7 @@ public:
 
 private:
 
-	void Load(const std::string& path) override;
+	bool Load(const std::string& path) override;
 
 	void Delete() override;
 };
@@ -64,7 +64,7 @@ public:
 
 private:
 
-	void Load(const std::string& path) override;
+	bool Load(const std::string& path) override;
 
 	void Delete() override;
 };
@@ -81,7 +81,7 @@ public:
 
 private:
 
-	void Load(const std::string& path) override;
+	bool Load(const std::string& path) override;
 
 	void Delete() override;
 };
@@ -98,7 +98,7 @@ public:
 
 private:
 
-	void Load(const std::string& path) override;
+	bool Load(const std::string& path) override;
 
 	void Delete() override;
 };

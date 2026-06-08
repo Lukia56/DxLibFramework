@@ -52,7 +52,10 @@ inline Resource* ResourceManager::GetResource(const std::string& path)
 	if (!mResources.contains(path))
 	{
 		std::unique_ptr<Resource> resource = std::make_unique<T>();
-		resource->Load(path);
+
+		// “Ç‚Ýž‚Ý‚ÉŽ¸”s‚µ‚½‚çnullptr‚ð•Ô‚·
+		if (resource->Load(path)) return nullptr;
+		
 		Resource* ptr = resource.get();
 
 		mResources.emplace(path, std::move(resource));
