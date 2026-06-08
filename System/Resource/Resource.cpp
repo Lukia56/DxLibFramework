@@ -21,3 +21,13 @@ void Model::Delete()
 {
 	MV1DeleteModel(mHandle);
 }
+
+void Sound::Load(const std::string& path)
+{
+	mHandle = LoadSoundMem(path.c_str());
+}
+
+void Sound::Delete()
+{
+	DeleteSoundMem(mHandle);
+}

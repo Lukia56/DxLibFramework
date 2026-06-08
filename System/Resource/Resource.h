@@ -68,3 +68,20 @@ private:
 
 	void Delete() override;
 };
+
+/// <summary>
+/// サウンドを管理するクラス
+/// </summary>
+class Sound : public Resource
+{
+public:
+
+	Sound() = default;
+	~Sound() = default;
+
+private:
+
+	void Load(const std::string& path) override;
+
+	void Delete() override;
+};
