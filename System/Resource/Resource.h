@@ -85,3 +85,20 @@ private:
 
 	void Delete() override;
 };
+
+/// <summary>
+/// サウンドを管理するクラス
+/// </summary>
+class Font : public Resource
+{
+public:
+
+	Font() = default;
+	~Font() = default;
+
+private:
+
+	void Load(const std::string& path) override;
+
+	void Delete() override;
+};

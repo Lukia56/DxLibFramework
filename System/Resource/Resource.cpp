@@ -31,3 +31,13 @@ void Sound::Delete()
 {
 	DeleteSoundMem(mHandle);
 }
+
+void Font::Load(const std::string& path)
+{
+	mHandle = LoadFontDataToHandle(path.c_str());
+}
+
+void Font::Delete()
+{
+	DeleteFontToHandle(mHandle);
+}

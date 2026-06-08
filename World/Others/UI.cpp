@@ -1,10 +1,15 @@
 #include "UI.h"
 #include <DxLib.h>
 #include "../Components/SpriteRenderer.h"
+#include "System/ResourceManager.h"
+#include "System/Resource/Resource.h"
+#include "Utility/Color.h"
 
 namespace
 {
 	const char* const kGraphHandlePath = "Resource\\Sprite\\impostor.png";
+
+	const char* const kFontHandlePath = "Resource\\Font\\MisakiGothic.dft";
 }
 
 UI::UI() :
@@ -23,7 +28,7 @@ UI::~UI()
 
 void UI::Init()
 {
-	GameObject::mTransform.localPosition = Vector3(320.0f, 240.0f, 0.0f);
+	GameObject::mTransform.localPosition = Vector3(240.0f, 240.0f, 0.0f);
 
 	mGraphHandle = LoadGraph(kGraphHandlePath);
 
@@ -37,7 +42,8 @@ void UI::Update()
 
 void UI::Draw()
 {
-	//DrawGraph(64, 64, mGraphHandle, true);
-
 	mSprite->Draw();
+
+	int handle = ResourceManager::GetInstance().GetResource<Font>(kFontHandlePath)->GetHandle();
+	DrawStringToHandle(240, 100, "テストテキスト", Color::white.GetAsHexRGB(), handle);
 }
