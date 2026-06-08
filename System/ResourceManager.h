@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -54,7 +55,11 @@ inline Resource* ResourceManager::GetResource(const std::string& path)
 		std::unique_ptr<Resource> resource = std::make_unique<T>();
 
 		// “Ç‚İ‚İ‚É¸”s‚µ‚½‚çnullptr‚ğ•Ô‚·
-		if (resource->Load(path)) return nullptr;
+		if (resource->Load(path))
+		{
+			assert(false && "ResourceManager // ƒŠƒ\[ƒX‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½");
+			return nullptr;
+		}
 		
 		Resource* ptr = resource.get();
 
