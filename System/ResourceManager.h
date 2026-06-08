@@ -6,6 +6,9 @@
 
 class Resource;
 
+/// <summary>
+/// リソースの多重ロードを防止するための管理クラス
+/// </summary>
 class ResourceManager
 {
 private:
