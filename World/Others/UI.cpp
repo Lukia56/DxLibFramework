@@ -1,6 +1,6 @@
 #include "UI.h"
 #include <DxLib.h>
-#include "../Components/SpriteRenderer.h"
+#include "../Components/Rendering/SpriteRenderer.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Resource.h"
 #include "Utility/Color.h"

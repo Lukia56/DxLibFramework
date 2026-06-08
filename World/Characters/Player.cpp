@@ -3,7 +3,7 @@
 #include <memory>
 #include <DxLib.h>
 #include "../Components/Collision3D.h"
-#include "../Components/ModelRenderer.h"
+#include "../Components/Rendering/ModelRenderer.h"
 #include "../Objects/Ball.h"
 #include "../Objects/Bullet.h"
 #include "../Objects/Crate.h"

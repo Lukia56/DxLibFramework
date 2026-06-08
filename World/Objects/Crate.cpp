@@ -2,7 +2,7 @@
 #include <memory>
 #include <DxLib.h>
 #include "../Components/Collision3D.h"
-#include "../Components/ModelRenderer.h"
+#include "../Components/Rendering/ModelRenderer.h"
 
 namespace
 {

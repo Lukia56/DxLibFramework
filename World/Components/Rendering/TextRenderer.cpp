@@ -1,6 +1,6 @@
 #include "TextRenderer.h"
 #include <DxLib.h>
-#include "../GameObject.h"
+#include "../../GameObject.h"
 #include "System/Resource/Resource.h"
 #include "Utility/Color.h"
 
