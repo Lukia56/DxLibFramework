@@ -1,6 +1,7 @@
 #include "UI.h"
 #include <DxLib.h>
 #include "../Components/Rendering/SpriteRenderer.h"
+#include "../Components/Rendering/TextRenderer.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Resource.h"
 #include "Utility/Color.h"
@@ -14,9 +15,11 @@ namespace
 
 UI::UI() :
 	mGraphHandle(-1),
-	mSprite(nullptr)
+	mSprite(nullptr),
+	mText(nullptr)
 {
 	mSprite = std::make_unique<SpriteRenderer>(this);
+	mText = std::make_unique<TextRenderer>(this);
 }
 
 UI::~UI()
@@ -33,6 +36,9 @@ void UI::Init()
 	mGraphHandle = LoadGraph(kGraphHandlePath);
 
 	mSprite->Load(kGraphHandlePath);
+
+	mText->Load(kFontHandlePath);
+	mText->SetText("テストテキスト");
 }
 
 void UI::Update()
@@ -44,6 +50,5 @@ void UI::Draw()
 {
 	mSprite->Draw();
 
-	int handle = ResourceManager::GetInstance().GetResource<Font>(kFontHandlePath)->GetHandle();
-	DrawStringToHandle(240, 100, "テストテキスト", Color::white.GetAsHexRGB(), handle);
+	mText->Draw();
 }

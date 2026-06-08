@@ -3,6 +3,7 @@
 #include "../GameObject.h"
 
 class SpriteRenderer;
+class TextRenderer;
 
 class UI : public GameObject
 {
@@ -22,5 +23,7 @@ private:
 	int mGraphHandle;
 
 	std::unique_ptr<SpriteRenderer> mSprite;
+
+	std::unique_ptr<TextRenderer> mText;
 };
 
