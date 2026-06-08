@@ -1,43 +1,24 @@
 #pragma once
 
+#include "Renderer.h"
 #include "Utility/Vector.h"
 
-class GameObject;
-class Resource;
-
-/// <summary>
-/// スプライト描画の管理をするクラス
-/// </summary>
-class SpriteRenderer
+class SpriteRenderer : public Renderer<Texture>
 {
 public:
 
 	SpriteRenderer(GameObject* owner);
-	~SpriteRenderer();
+	~SpriteRenderer() = default;
 
-	/// <summary>
-	/// モデルの読み込み
-	/// </summary>
-	/// <param name="filePath"></param>
-	void Load(const char* const filePath);
+	void Load(const std::string& filePath) override;
 
-	/// <summary>
-	/// モデルの描画
-	/// </summary>
-	void Draw();
+	void Draw() override;
 
 private:
-
-	Resource* mTexture;
 
 	/// <summary>
 	/// 画像のサイズの半径
 	/// </summary>
 	Vector2 mHalfSize;
-
-	/// <summary>
-	/// 自身を所有するゲームオブジェクト
-	/// </summary>
-	GameObject* mOwner;
 };
 

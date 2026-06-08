@@ -144,6 +144,7 @@
     <ClCompile Include="System\Resource\Resource.cpp" />
     <ClCompile Include="Utility\Color.cpp" />
     <ClCompile Include="World\Components\SpriteRenderer.cpp" />
+    <ClCompile Include="World\Components\TextRenderer.cpp" />
     <ClCompile Include="World\Others\UI.cpp" />
     <ClCompile Include="World\Components\ModelRenderer.cpp" />
     <ClCompile Include="World\Components\Transform.cpp" />
@@ -184,9 +185,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="World\Components\Renderer.h" />
     <ClInclude Include="System\ResourceManager.h" />
     <ClInclude Include="System\Resource\Resource.h" />
     <ClInclude Include="World\Components\SpriteRenderer.h" />
+    <ClInclude Include="World\Components\TextRenderer.h" />
     <ClInclude Include="World\Others\UI.h" />
     <ClInclude Include="World\Components\ModelRenderer.h" />
     <ClInclude Include="World\Components\Transform.h" />

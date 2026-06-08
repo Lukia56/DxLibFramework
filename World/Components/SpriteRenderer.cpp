@@ -1,39 +1,33 @@
 #include "SpriteRenderer.h"
 #include <DxLib.h>
 #include "../GameObject.h"
-#include "System/ResourceManager.h"
 #include "System/Resource/Resource.h"
 
 SpriteRenderer::SpriteRenderer(GameObject* owner) :
-	mTexture(nullptr),
-	mHalfSize(Vector2::One),
-	mOwner(owner)
+	Renderer(owner),
+	mHalfSize(Vector2::One)
 {
 }
 
-SpriteRenderer::~SpriteRenderer()
+void SpriteRenderer::Load(const std::string& filePath)
 {
-	mTexture = nullptr;
-}
+	Renderer::Load(filePath);
 
-void SpriteRenderer::Load(const char* const filePath)
-{
-	mTexture = ResourceManager::GetInstance().GetResource<Texture>(filePath);
-
-	if (!mTexture) return;
+	if (!mResource) return;
 
 	// ‰æ‘œ‚Ì”¼Œa‚ðŽæ“¾
-	GetGraphSizeF(mTexture->GetHandle(), &mHalfSize.x, &mHalfSize.y);
+	GetGraphSizeF(mResource->GetHandle(), &mHalfSize.x, &mHalfSize.y);
 	mHalfSize *= 0.5f;
 }
 
 void SpriteRenderer::Draw()
 {
-	if (!mTexture) return;
+	if (!mOwner) return;
+	if (!mResource) return;
 
 	const VECTOR pos = mOwner->GetTransform().GetWorldPosition().GetAsDxLibVector();
 	const VECTOR rot = mOwner->GetTransform().GetWorldRotation().GetAsDxLibVector();
 	const VECTOR scale = mOwner->GetTransform().GetWorldScale().GetAsDxLibVector();
 
-	DrawRotaGraphFast3F(pos.x, pos.y, mHalfSize.x, mHalfSize.y, scale.x, scale.y, rot.z, mTexture->GetHandle(), true);
+	DrawRotaGraphFast3F(pos.x, pos.y, mHalfSize.x, mHalfSize.y, scale.x, scale.y, rot.z, mResource->GetHandle(), true);
 }

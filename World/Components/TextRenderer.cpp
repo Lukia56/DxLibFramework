@@ -1,25 +1,13 @@
 #include "TextRenderer.h"
 #include <DxLib.h>
 #include "../GameObject.h"
-#include "System/ResourceManager.h"
 #include "System/Resource/Resource.h"
 #include "Utility/Color.h"
 
 TextRenderer::TextRenderer(GameObject* owner) :
-	mText(""),
-	mFont(nullptr),
-	mOwner(owner)
+	Renderer(owner),
+	mText("")
 {
-}
-
-TextRenderer::~TextRenderer()
-{
-	mFont = nullptr;
-}
-
-void TextRenderer::Load(const char* const filePath)
-{
-	mFont = ResourceManager::GetInstance().GetResource<Font>(filePath);
 }
 
 void TextRenderer::Draw()
@@ -28,9 +16,9 @@ void TextRenderer::Draw()
 
 	const VECTOR pos = mOwner->GetTransform().GetWorldPosition().GetAsDxLibVector();
 
-	if (mFont)
+	if (mResource)
 	{
-		DrawStringToHandle(pos.x, pos.y, mText.c_str(), Color::white.GetAsHexRGB(), mFont->GetHandle());
+		DrawStringToHandle(pos.x, pos.y, mText.c_str(), Color::white.GetAsHexRGB(), mResource->GetHandle());
 	}
 	else
 	{

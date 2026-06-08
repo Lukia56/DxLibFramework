@@ -2,9 +2,9 @@
 
 #include <string>
 #include "System/ResourceManager.h"
+#include "System/Resource/Resource.h"
 
 class GameObject;
-class Resource;
 
 /// <summary>
 /// グラフィックリソースの描画管理の基底クラス
