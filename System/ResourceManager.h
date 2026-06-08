@@ -55,7 +55,7 @@ inline Resource* ResourceManager::GetResource(const std::string& path)
 		std::unique_ptr<Resource> resource = std::make_unique<T>();
 
 		// “Ç‚İ‚İ‚É¸”s‚µ‚½‚çnullptr‚ğ•Ô‚·
-		if (resource->Load(path))
+		if (!resource->Load(path))
 		{
 			assert(false && "ResourceManager // ƒŠƒ\[ƒX‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½");
 			return nullptr;
