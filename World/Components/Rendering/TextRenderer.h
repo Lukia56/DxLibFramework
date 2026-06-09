@@ -3,6 +3,9 @@
 #include "Renderer.h"
 #include "Utility/Color.h"
 
+/// <summary>
+/// テキストの描画管理を行うクラス
+/// </summary>
 class TextRenderer : public Renderer<Font>
 {
 public:
@@ -10,6 +13,9 @@ public:
 	TextRenderer(GameObject* owner);
 	~TextRenderer() = default;
 
+	/// <summary>
+	/// リソースをゲームオブジェクトのトランスフォームで描画する
+	/// </summary>
 	void Draw() override;
 
 	/// <summary>
