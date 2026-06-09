@@ -19,7 +19,7 @@ public:
 	/// </summary>
 	/// <param name="keyCode">キーコード</param>
 	/// <returns>押下状態</returns>
-	bool IsDown(int keyCode);
+	bool IsDown(int keyCode) const;
 
 	/// <summary>
 	/// インスタンスの生成、取得を行う

@@ -30,7 +30,7 @@ public:
 	/// </summary>
 	/// <param name="keyCode">キーコード</param>
 	/// <returns>押下状態</returns>
-	bool IsDown(int keyCode);
+	bool IsDown(int keyCode) const;
 
 public:
 

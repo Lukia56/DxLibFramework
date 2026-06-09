@@ -60,9 +60,6 @@
     <ClCompile Include="System\Input\Keyboard.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="System\Input\Mouse.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="System\Input\Modifier\InputModifierDeadzone.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -144,6 +141,9 @@
     <ClCompile Include="World\Components\Rendering\TextRenderer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="System\Input\Mouse.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -198,9 +198,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="System\Input\Modifier\IInputModifier.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="System\Input\Modifier\InputModifierDeadzone.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="System\Input\Modifier\InputModifierNegate.h">
@@ -288,6 +285,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="World\Components\Rendering\Renderer.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Input\Modifier\InputModifierDeadzone.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

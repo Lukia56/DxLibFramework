@@ -6,7 +6,7 @@ void Keyboard::Update()
 	GetHitKeyStateAll(mState);
 }
 
-bool Keyboard::IsDown(int keyCode)
+bool Keyboard::IsDown(int keyCode) const
 {
 	return mState[keyCode];
 }

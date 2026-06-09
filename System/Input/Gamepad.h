@@ -24,7 +24,7 @@ public:
 	/// <param name="keyCode">キーコード</param>
 	/// <param name="slot">ゲームパッドの識別番号</param>
 	/// <returns>押下状態</returns>
-	bool IsDown(int keyCode, Input::PadSlot slot = Input::PadSlot::Player1);
+	bool IsDown(int keyCode, Input::PadSlot slot = Input::PadSlot::Player1) const;
 
 public:
 

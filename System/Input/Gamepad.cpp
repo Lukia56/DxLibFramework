@@ -14,7 +14,7 @@ void Gamepad::Update()
 	}
 }
 
-bool Gamepad::IsDown(int keyCode, Input::PadSlot slot)
+bool Gamepad::IsDown(int keyCode, Input::PadSlot slot) const
 {
 	int s = static_cast<int>(slot);
 
