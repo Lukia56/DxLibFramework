@@ -10,7 +10,8 @@ namespace
 {
 	const char* const kGraphHandlePath = "Resource\\Sprite\\impostor.png";
 
-	const char* const kFontHandlePath = "Resource\\Font\\MisakiGothic.dft";
+	const char* const kFontHandlePath = "Resource\\Font\\JFDotK12.dft";
+	//const char* const kFontHandlePath = "Resource\\Font\\MisakiGothic.dft";
 }
 
 UI::UI() :

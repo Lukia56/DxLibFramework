@@ -40,7 +40,7 @@ void Sound::Delete()
 
 bool Font::Load(const std::string& path)
 {
-	mHandle = LoadFontDataToHandle(path.c_str());
+	mHandle = LoadFontDataToHandle(path.c_str(), 1);
 
 	return mHandle != -1;
 }
