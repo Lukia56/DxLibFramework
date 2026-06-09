@@ -13,13 +13,13 @@ void ResourceManager::Finalize()
 
 void ResourceManager::ReleaseAll()
 {
-	for (auto& it : mResources)
+	for (auto& it : mResourceTable)
 	{
 		if (it.second->GetHandle() == -1) continue;
 
 		it.second->Delete();
 	}
-	mResources.clear();
+	mResourceTable.clear();
 }
 
 ResourceManager& ResourceManager::GetInstance()

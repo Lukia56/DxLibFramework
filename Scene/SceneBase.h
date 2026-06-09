@@ -7,7 +7,7 @@ class GameObject;
 
 /// <summary>
 /// シーンの基礎となるクラス
-/// ゲームオブジェクトの管理を行う
+/// ゲームオブジェクトの更新やライフサイクルの管理を行う
 /// </summary>
 class SceneBase
 {

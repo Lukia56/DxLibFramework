@@ -42,7 +42,7 @@ public:
 
 private:
 
-	std::unordered_map<std::string, std::unique_ptr<Resource>> mResources;
+	std::unordered_map<std::string, std::unique_ptr<Resource>> mResourceTable;
 };
 
 template<class T>
@@ -50,7 +50,7 @@ requires std::derived_from<T, Resource>
 inline Resource* ResourceManager::GetResource(const std::string& path)
 {
 	// ‰‰ñ“Ç‚İ‚İ
-	if (!mResources.contains(path))
+	if (!mResourceTable.contains(path))
 	{
 		std::unique_ptr<Resource> resource = std::make_unique<T>();
 
@@ -63,10 +63,10 @@ inline Resource* ResourceManager::GetResource(const std::string& path)
 		
 		Resource* ptr = resource.get();
 
-		mResources.emplace(path, std::move(resource));
+		mResourceTable.emplace(path, std::move(resource));
 
 		return ptr;
 	}
 
-	return mResources.at(path).get();
+	return mResourceTable.at(path).get();
 }

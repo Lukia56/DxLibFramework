@@ -5,7 +5,7 @@
 class SceneBase;
 
 /// <summary>
-/// シーンの管理をするクラス
+/// シーンの遷移やライフサイクルの管理をするクラス
 /// </summary>
 class SceneManager
 {

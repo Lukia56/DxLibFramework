@@ -2,6 +2,10 @@
 
 #include "SceneBase.h"
 
+/// <summary>
+/// 初期化シーン
+/// 今は最初のシーンへの遷移のみ行う
+/// </summary>
 class SceneInit :  public SceneBase
 {
 public:

@@ -5,13 +5,12 @@
 #include "Components/Transform.h"
 
 /// <summary>
-/// ゲームオブジェクトクラス
+/// ゲームで扱うオブジェクトの基底クラス
+/// トランスフォームを管理する
 /// </summary>
 class GameObject
 {
 public:
-
-	using GameObjectContainer = std::vector<std::unique_ptr<GameObject>>;
 
 	GameObject();
 	virtual ~GameObject();
@@ -79,7 +78,7 @@ private:
 
 	/// <summary>
 	/// 削除処理が呼ばれたかどうか
-	/// 更新処理後に削除するかを判定する
+	/// 更新処理後に削除するかのフラグ
 	/// </summary>
 	bool mIsCalledDestroy;
 };

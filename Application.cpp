@@ -52,10 +52,10 @@ bool Application::Initialize()
 
 void Application::Finalize()
 {
-	ResourceManager::GetInstance().Finalize();
-
 	// メンバの後処理
 	mSceneManager->Finalize();
+
+	ResourceManager::GetInstance().Finalize();
 
 	// メモリリークが起きる可能性があるため最後に呼ぶ
 	DxLib_End();
