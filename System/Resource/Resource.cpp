@@ -8,7 +8,6 @@ bool Texture::Load(const std::string& path)
 
 	return mHandle != -1;
 }
-
 void Texture::Delete()
 {
 	DeleteGraph(mHandle);
@@ -20,7 +19,6 @@ bool Model::Load(const std::string& path)
 
 	return mHandle != -1;
 }
-
 void Model::Delete()
 {
 	MV1DeleteModel(mHandle);
@@ -32,7 +30,6 @@ bool Sound::Load(const std::string& path)
 
 	return mHandle != -1;
 }
-
 void Sound::Delete()
 {
 	DeleteSoundMem(mHandle);
@@ -44,7 +41,6 @@ bool Font::Load(const std::string& path)
 
 	return mHandle != -1;
 }
-
 void Font::Delete()
 {
 	DeleteFontToHandle(mHandle);

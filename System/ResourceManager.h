@@ -36,6 +36,9 @@ public:
 	requires std::derived_from<T, Resource>
 	Resource* GetResource(const std::string& path);
 
+	/// <summary>
+	/// Œ»İ“Ç‚İ‚ñ‚Å‚¢‚é‚·‚×‚Ä‚ÌƒŠƒ\[ƒX‚ğ‰ğ•ú‚·‚é
+	/// </summary>
 	void ReleaseAll();
 
 	static ResourceManager& GetInstance();

@@ -27,6 +27,7 @@ private:
 	/// <summary>
 	/// 読み込み処理がリソースごとに違うため純粋仮想化
 	/// </summary>
+	/// <returns>読み込みに成功したらtrue</returns>
 	virtual bool Load(const std::string& path) = 0;
 
 	/// <summary>
