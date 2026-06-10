@@ -1,14 +1,18 @@
 #include "CameraDebugFree.h"
 #include <cmath>
 #include "System/InputManager.h"
+#include "System/Input/Mouse.h"
 #include "Utility/Math.h"
 #include "Utility/Vector.h"
 
 namespace
 {
 	constexpr float kMoveSpeed = 10.0f;
+	constexpr float kRotSpeed = Math::ToRadian(10.0f);
 
 	constexpr float kDistanceToTarget = 100.0f;
+
+	constexpr float kPitchLimit = Math::ToRadian(89.0f);
 }
 
 CameraDebugFree::CameraDebugFree()
@@ -17,8 +21,16 @@ CameraDebugFree::CameraDebugFree()
 
 void CameraDebugFree::Update(Camera::View& view)
 {
-	float pitchRad = Math::ToRadian(mRotation.x);
-	float yawRad = Math::ToRadian(mRotation.y);
+	if (Mouse::GetInstance().GetRelative() != Vector2::Zero && Mouse::GetInstance().IsDown(MOUSE_INPUT_LEFT)
+	|| Mouse::GetInstance().GetRelative() == Vector2::Zero)
+	{
+		mRotation += InputManager::GetInstance().GetAsVector3(Input::Action::Look) * kRotSpeed;
+	}
+
+	mRotation.x = Math::Clamp(mRotation.x, -kPitchLimit, kPitchLimit);
+
+	float pitchRad = mRotation.x;
+	float yawRad = mRotation.y;
 
 	Vector3 forward;
 	forward.x = std::cos(pitchRad) * std::sin(yawRad);

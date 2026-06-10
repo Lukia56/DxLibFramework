@@ -59,8 +59,20 @@ bool InputManager::Initialize()
 		});
 	Bind(Input::Action::Move, Input::Device::Keyboard, KeyCode::Button::D);
 
-	Bind(Input::Action::Fly, Input::Device::Keyboard, KeyCode::Button::Space, { std::make_shared<InputModifierNegate>(false, false, false) });
+	Bind(Input::Action::Look, Input::Device::Gamepad, KeyCode::Button::GpRightThumb,
+		{
+			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::YXZ)
+		});
+	Bind(Input::Action::Look, Input::Device::Mouse, KeyCode::Button::MbDelta,
+		{
+			std::make_shared<InputModifierNegate>(false, true, false),
+			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::YXZ)
+		});
+
+	Bind(Input::Action::Fly, Input::Device::Keyboard, KeyCode::Button::Space);
 	Bind(Input::Action::Fly, Input::Device::Keyboard, KeyCode::Button::LShift, { std::make_shared<InputModifierNegate>(true, false, false) });
+	Bind(Input::Action::Fly, Input::Device::Gamepad, KeyCode::Button::GpFaceRight);
+	Bind(Input::Action::Fly, Input::Device::Gamepad, KeyCode::Button::GpFaceDown, { std::make_shared<InputModifierNegate>(true, false, false) });
 
 	return true;
 }
