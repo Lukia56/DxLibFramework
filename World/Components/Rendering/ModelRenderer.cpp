@@ -24,4 +24,6 @@ void ModelRenderer::Draw()
 	MV1SetScale(handle, scale);
 
 	MV1DrawModel(handle);
+
+	MV1DeleteModel(handle);
 }
