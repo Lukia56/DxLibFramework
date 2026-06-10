@@ -59,6 +59,9 @@ bool InputManager::Initialize()
 		});
 	Bind(Input::Action::Move, Input::Device::Keyboard, KeyCode::Button::D);
 
+	Bind(Input::Action::Fly, Input::Device::Keyboard, KeyCode::Button::Space, { std::make_shared<InputModifierNegate>(false, false, false) });
+	Bind(Input::Action::Fly, Input::Device::Keyboard, KeyCode::Button::LShift, { std::make_shared<InputModifierNegate>(true, false, false) });
+
 	return true;
 }
 

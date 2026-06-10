@@ -12,6 +12,7 @@ namespace Input
 		Left,
 		Right,
 		Move,
+		Fly,
 		Length
 	};
 }

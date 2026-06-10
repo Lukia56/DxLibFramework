@@ -2,7 +2,7 @@
 
 #include "SceneBase.h"
 
-class Camera;
+//class Camera;
 class Player;
 class Crate;
 class UI;
@@ -32,7 +32,7 @@ public:
 
 private:
 
-	Camera* mCamera;
+	//Camera* mCamera;
 	Player* mPlayer;
 	Crate* mCrate;
 	UI* mUI;
