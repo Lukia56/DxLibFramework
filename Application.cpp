@@ -2,6 +2,7 @@
 #include <chrono>
 #include <memory>
 #include <DxLib.h>
+#include <Psapi.h>
 #include "Scene/SceneManager.h"
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
@@ -96,6 +97,12 @@ void Application::ProcessOutput()
 	// •`‰æ
 	ClearDrawScreen();
 	clsDx();
+
+#ifdef _DEBUG
+	PROCESS_MEMORY_COUNTERS_EX pmc;
+	GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+	printfDx("Memory: %.3f MB\n", pmc.WorkingSetSize / 1024.0f / 1024.0f);
+#endif
 
 	mSceneManager->Draw();
 	mSceneManager->DebugDraw();
