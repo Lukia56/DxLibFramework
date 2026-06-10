@@ -14,7 +14,7 @@ public:
 	Resource() : mHandle(-1) {};
 	virtual ~Resource() = default;
 
-	virtual int GetHandle() const { return mHandle; };
+	virtual int GetHandle() const { return mHandle; }
 
 protected:
 
@@ -62,6 +62,8 @@ public:
 
 	Model() = default;
 	~Model() = default;
+
+	int GetHandle() const override;
 
 private:
 

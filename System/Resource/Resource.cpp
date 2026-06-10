@@ -13,6 +13,11 @@ void Texture::Delete()
 	DeleteGraph(mHandle);
 }
 
+int Model::GetHandle() const
+{
+	return MV1DuplicateModel(mHandle);
+}
+
 bool Model::Load(const std::string& path)
 {
 	mHandle = MV1LoadModel(path.c_str());
