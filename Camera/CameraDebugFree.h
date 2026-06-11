@@ -10,7 +10,7 @@ class CameraDebugFree : public ICamera
 {
 public:
 
-	CameraDebugFree();
+	CameraDebugFree() = default;
 	~CameraDebugFree() = default;
 
 	void Update(Camera::View& view) override;

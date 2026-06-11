@@ -18,10 +18,6 @@ namespace
 	constexpr float kCrossHairLength = 25.0f;
 }
 
-CameraDebugFree::CameraDebugFree()
-{
-}
-
 void CameraDebugFree::Update(Camera::View& view)
 {
 	Look();
