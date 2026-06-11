@@ -142,7 +142,6 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Camera\CameraDebugFree.cpp" />
     <ClCompile Include="Camera\CameraManager.cpp" />
-    <ClCompile Include="Camera\ICamera.cpp" />
     <ClCompile Include="System\Input\Mouse.cpp" />
     <ClCompile Include="System\ResourceManager.cpp" />
     <ClCompile Include="System\Resource\Resource.cpp" />

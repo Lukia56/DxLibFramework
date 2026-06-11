@@ -144,9 +144,6 @@
     <ClCompile Include="System\Input\Mouse.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Camera\ICamera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Camera\CameraManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>

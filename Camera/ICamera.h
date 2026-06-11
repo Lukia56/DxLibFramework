@@ -10,4 +10,6 @@ public:
 	virtual ~ICamera() = default;
 
 	virtual void Update(Camera::View& view) = 0;
+
+	virtual void DebugDraw() {}
 };

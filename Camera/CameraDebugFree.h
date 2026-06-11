@@ -15,6 +15,16 @@ public:
 
 	void Update(Camera::View& view) override;
 
+	void DebugDraw() override;
+
+private:
+
+	void Look();
+
+	void Move();
+
+	void DrawCrossHair();
+
 private:
 
 	Vector3 mPosition;

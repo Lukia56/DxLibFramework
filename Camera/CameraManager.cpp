@@ -2,7 +2,6 @@
 #include <cassert>
 #include <DxLib.h>
 #include "ICamera.h"
-#include "Utility/Color.h"
 #include "Utility/Math.h"
 
 namespace
@@ -11,8 +10,6 @@ namespace
 
 	constexpr float kInitNearClip = 5.0f;
 	constexpr float kInitFarClip = 5000.0f;
-
-	constexpr float kCrossHairLength = 10.0f;
 }
 
 CameraManager::CameraManager() :
@@ -45,26 +42,7 @@ void CameraManager::Update()
 
 void CameraManager::DebugDraw() const
 {
-	Vector3 targetPos = mView.targetPosition;
-
-	// XŽ²‚ð•`‰æ
-	DrawLine3D(
-		targetPos.GetAsDxLibVector(),
-		(targetPos + Vector3::XAxis * kCrossHairLength).GetAsDxLibVector(),
-		Color::red.GetAsHexRGB()
-	);
-	// YŽ²‚ð•`‰æ
-	DrawLine3D(
-		targetPos.GetAsDxLibVector(),
-		(targetPos + Vector3::YAxis * kCrossHairLength).GetAsDxLibVector(),
-		Color::green.GetAsHexRGB()
-	);
-	// ZŽ²‚ð•`‰æ
-	DrawLine3D(
-		targetPos.GetAsDxLibVector(),
-		(targetPos + Vector3::ZAxis * kCrossHairLength).GetAsDxLibVector(),
-		Color::blue.GetAsHexRGB()
-	);
+	mCameras[static_cast<size_t>(mCurrentCameraType)]->DebugDraw();
 }
 
 void CameraManager::Bind() const
