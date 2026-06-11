@@ -44,10 +44,10 @@ public:
 
 public:
 
-	/// <summary>
-	/// トランスフォームを取得する
-	/// </summary>
 	Transform& GetTransform() { return mTransform; }
+
+	bool IsActive() const { return mIsActive; }
+	void SetActive(bool flag) { mIsActive = flag; }
 
 protected:
 
@@ -81,6 +81,12 @@ private:
 	/// 更新処理後に削除するかのフラグ
 	/// </summary>
 	bool mIsCalledDestroy;
+
+	/// <summary>
+	/// 更新処理を行うかどうかのフラグ
+	/// 非アクティブになるとすべての子オブジェクトも非アクティブになる
+	/// </summary>
+	bool mIsActive;
 };
 
 template <class T>

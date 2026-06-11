@@ -6,7 +6,8 @@
 
 GameObject::GameObject() :
 	mTransform(this),
-	mIsCalledDestroy(false)
+	mIsCalledDestroy(false),
+	mIsActive(true)
 {
 }
 

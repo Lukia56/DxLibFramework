@@ -69,6 +69,8 @@ void SceneBase::DrawRootObjects()
 
 void SceneBase::Update(GameObject* gameObject)
 {
+	if (!gameObject->IsActive()) return;
+
 	gameObject->Update();
 
 	// 子オブジェクトについて再帰
@@ -80,6 +82,8 @@ void SceneBase::Update(GameObject* gameObject)
 
 void SceneBase::Draw(GameObject* gameObject)
 {
+	if (!gameObject->IsActive()) return;
+
 	gameObject->Draw();
 
 	// 子オブジェクトについて再帰
