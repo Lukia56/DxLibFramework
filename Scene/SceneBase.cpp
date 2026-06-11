@@ -1,17 +1,46 @@
 #include "SceneBase.h"
 #include <cassert>
+#include <memory>
 #include "../World/GameObject.h"
+#include "Camera/CameraManager.h"
+#include "Camera/CameraDebugFree.h"
 
-SceneBase::SceneBase() = default;
+SceneBase::SceneBase() :
+	mCameraManager(nullptr)
+{
+	mCameraManager = std::make_unique<CameraManager>();
+	mCameraManager->AddCamera(Camera::Type::DebugFree, std::make_unique<CameraDebugFree>());
+	mCameraManager->SetCurrentCameraType(Camera::Type::DebugFree);
+}
 
 SceneBase::~SceneBase()
 {
+	mCameraManager.reset();
+
 	while (mRootObjects.size() > 0)
 	{
 		auto it = mRootObjects.begin();
 		(*it)->Finalize();
 		mRootObjects.erase(it);
 	}
+}
+
+std::unique_ptr<SceneBase> SceneBase::UpdateBase()
+{
+	UpdateRootObjects();
+
+	mCameraManager->Update();
+
+	return Update();
+}
+
+void SceneBase::DrawBase()
+{
+	mCameraManager->Bind();
+
+	DrawRootObjects();
+
+	mCameraManager->DebugDraw();
 }
 
 void SceneBase::UpdateRootObjects()

@@ -105,7 +105,6 @@ void Application::ProcessOutput()
 #endif
 
 	mSceneManager->Draw();
-	mSceneManager->DebugDraw();
 
 	// ‰æ–Ê‚É•\Ž¦
 	ScreenFlip();

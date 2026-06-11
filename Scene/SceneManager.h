@@ -3,7 +3,6 @@
 #include <memory>
 
 class SceneBase;
-class CameraManager;
 
 /// <summary>
 /// シーンの遷移やライフサイクルの管理をするクラス
@@ -37,11 +36,6 @@ public:
 	/// </summary>
 	void Draw();
 
-	/// <summary>
-	/// デバッグ情報の描画
-	/// </summary>
-	void DebugDraw();
-
 private:
 
 	/// <summary>
@@ -54,8 +48,6 @@ private:
 private:
 
 	std::unique_ptr<SceneBase> mCurrentScene;
-
-	std::unique_ptr<CameraManager> mCameraManager;
 };
 
 template<class T>

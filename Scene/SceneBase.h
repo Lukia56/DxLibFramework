@@ -4,6 +4,7 @@
 #include <vector>
 
 class GameObject;
+class CameraManager;
 
 /// <summary>
 /// シーンの基礎となるクラス
@@ -29,22 +30,27 @@ public:
 	virtual void Finalize() = 0;
 
 	/// <summary>
+	/// 基底の更新処理
+	/// </summary>
+	/// <returns>次のシーンのポインタ</returns>
+	std::unique_ptr<SceneBase> UpdateBase();
+
+	/// <summary>
+	/// 基底の描画処理
+	/// </summary>
+	void DrawBase();
+
+public:
+
+	CameraManager* GetCameraManager() const { return mCameraManager.get(); }
+
+protected:
+
+	/// <summary>
 	/// 更新処理
 	/// </summary>
 	/// <returns>次のシーンのポインタ</returns>
 	virtual std::unique_ptr<SceneBase> Update() = 0;
-
-	/// <summary>
-	/// ルートオブジェクトの更新処理を呼ぶ
-	/// </summary>
-	void UpdateRootObjects();
-
-	/// <summary>
-	/// ルートオブジェクトの描画処理を呼ぶ
-	/// </summary>
-	void DrawRootObjects();
-
-protected:
 
 	/// <summary>
 	/// ルートオブジェクトに追加する
@@ -58,6 +64,16 @@ protected:
 private:
 
 	/// <summary>
+	/// ルートオブジェクトの更新処理を呼ぶ
+	/// </summary>
+	void UpdateRootObjects();
+
+	/// <summary>
+	/// ルートオブジェクトの描画処理を呼ぶ
+	/// </summary>
+	void DrawRootObjects();
+
+	/// <summary>
 	/// ゲームオブジェクトの更新処理
 	/// </summary>
 	void Update(GameObject* gameObject);
@@ -69,10 +85,9 @@ private:
 
 private:
 	
-	/// <summary>
-	/// ルートオブジェクト
-	/// </summary>
 	GameObjectContainer mRootObjects;
+
+	std::unique_ptr<CameraManager> mCameraManager;
 };
 
 template <class T>
