@@ -32,6 +32,28 @@ namespace Math
 	{
 		return radian * 180.0f / kPi;
 	}
+	/// <summary>
+	/// デグリー角を180度～-180度の間に収める
+	/// </summary>
+	template <std::floating_point T>
+	constexpr T NormalizeDegree(T degree)
+	{
+		while (degree > 180.0f) degree -= 360.0f;
+		while (degree < -180.0f) degree += 360.0f;
+
+		return degree;
+	}
+	/// <summary>
+	/// ラジアン角を180度～-180度の間に収める
+	/// </summary>
+	template <std::floating_point T>
+	constexpr T NormalizeRadian(T radian)
+	{
+		while (radian > Math::kPi) radian -= Math::k2Pi;
+		while (radian < -Math::kPi) radian += Math::k2Pi;
+
+		return radian;
+	}
 
 	/// <summary>
 	/// 2つの値を比べて大きいほうを取得する
