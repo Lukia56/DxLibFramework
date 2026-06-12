@@ -66,16 +66,16 @@ void Player::Draw()
 
 	mCollider->DebugDraw();
 	
-	Collision3D::Result result;
-	result = mCollider->CheckCollision(mCrate->GetColiider());
-	if (result.isHit)
-	{
-		printfDx("AABB vs AABB | Õ“Ë‚µ‚Ä‚¢‚é\n");
-		printfDx("Result.penetration = %f\n", result.penetration);
-		printfDx("Result.normal.x = %f\n", result.normal.x);
-		printfDx("Result.normal.y = %f\n", result.normal.y);
-		printfDx("Result.normal.z = %f\n", result.normal.z);
-	}
+	//Collision3D::Result result;
+	//result = mCollider->CheckCollision(mCrate->GetColiider());
+	//if (result.isHit)
+	//{
+	//	printfDx("AABB vs AABB | Õ“Ë‚µ‚Ä‚¢‚é\n");
+	//	printfDx("Result.penetration = %f\n", result.penetration);
+	//	printfDx("Result.normal.x = %f\n", result.normal.x);
+	//	printfDx("Result.normal.y = %f\n", result.normal.y);
+	//	printfDx("Result.normal.z = %f\n", result.normal.z);
+	//}
 	//result = mCollider->CheckCollision(mBall->GetColiider());
 	//if (result.isHit)
 	//{

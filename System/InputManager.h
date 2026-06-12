@@ -116,6 +116,12 @@ private:
 	bool GetState(Input::Action action, InputType inputType, int frame = 0) const;
 
 	/// <summary>
+	/// アナログ値を取得する
+	/// </summary>
+	/// <returns></returns>
+	Vector3 GetValue(Input::Action action) const;
+
+	/// <summary>
 	/// アクションデータにボタンを割り当てる
 	/// </summary>
 	/// <param name="action">アクションID</param>

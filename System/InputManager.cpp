@@ -119,96 +119,20 @@ bool InputManager::IsHeld(Input::Action action, int frame) const
 
 float InputManager::GetAsFloat(Input::Action action) const
 {
-	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
-
-	// 対応したアクションマップが無効化されていたら
-	if (!mActionMapState[static_cast<size_t>(actionProperty.map)]) return 0.0f;
-
-	float result = 0.0f;
-
-	// アクションに割り当てられたボタンをすべてチェックする
-	for (const auto& bind : actionProperty.binds)
-	{
-		auto device = mDevices.at(bind.device).get();
-		
-		Vector3 value = device->GetValue(bind.keyCode);
-
-		// バインドに割り当てられた加工をする
-		for (const auto& modifier : bind.modifiers)
-		{
-			modifier->ModifyRaw(value);
-		}
-		
-		// 絶対値が大きい方を使用する
-		if (std::abs(result) < std::abs(value.x)) result = value.x;
-	}
-
-	return result;
+	Vector3 value = InputManager::GetValue(action);
+	return value.x;
 }
 
 Vector2 InputManager::GetAsVector2(Input::Action action) const
 {
-	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
-
-	// 対応したアクションマップが無効化されていたら
-	if (!mActionMapState[static_cast<size_t>(actionProperty.map)]) return Vector2::Zero;
-
-	Vector2 result = Vector2::Zero;
-
-	// アクションに割り当てられたボタンをすべてチェックする
-	for (const auto& bind : actionProperty.binds)
-	{
-		auto device = mDevices.at(bind.device).get();
-		
-		Vector3 value = device->GetValue(bind.keyCode);
-
-		// バインドに割り当てられた加工をする
-		for (const auto& modifier : bind.modifiers)
-		{
-			modifier->ModifyRaw(value);
-		}
-		
-		// 絶対値が大きい方を使用する
-		if (std::abs(result.x) < std::abs(value.x)) result.x = value.x;
-		if (std::abs(result.y) < std::abs(value.y)) result.y = value.y;
-	}
-
-	if (result.GetSqLength() > 1.0f) result = result.GetNormalize();
-
-	return result;
+	Vector3 value = InputManager::GetValue(action);
+	return Vector2(value.x, value.y);
 }
 
 Vector3 InputManager::GetAsVector3(Input::Action action) const
 {
-	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
-
-	// 対応したアクションマップが無効化されていたら
-	if (!mActionMapState[static_cast<size_t>(actionProperty.map)]) return Vector3::Zero;
-
-	Vector3 result = Vector3::Zero;
-
-	// アクションに割り当てられたボタンをすべてチェックする
-	for (const auto& bind : actionProperty.binds)
-	{
-		auto device = mDevices.at(bind.device).get();
-		
-		Vector3 value = device->GetValue(bind.keyCode);
-
-		// バインドに割り当てられた加工をする
-		for (const auto& modifier : bind.modifiers)
-		{
-			modifier->ModifyRaw(value);
-		}
-		
-		// 絶対値が大きい方を使用する
-		if (std::abs(result.x) < std::abs(value.x)) result.x = value.x;
-		if (std::abs(result.y) < std::abs(value.y)) result.y = value.y;
-		if (std::abs(result.z) < std::abs(value.z)) result.z = value.z;
-	}
-
-	if (result.GetSqLength() > 1.0f) result = result.GetNormalize();
-
-	return result;
+	Vector3 value = InputManager::GetValue(action);
+	return value;
 }
 
 InputManager& InputManager::GetInstance()
@@ -254,6 +178,39 @@ bool InputManager::GetState(Input::Action action, InputType inputType, int frame
 
 	// ここまで来たら押されていないためfalse
 	return false;
+}
+
+Vector3 InputManager::GetValue(Input::Action action) const
+{
+	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
+
+	// 対応したアクションマップが無効化されていたら
+	if (!mActionMapState[static_cast<size_t>(actionProperty.map)]) return Vector3::Zero;
+
+	Vector3 result = Vector3::Zero;
+
+	// アクションに割り当てられたボタンをすべてチェックする
+	for (const auto& bind : actionProperty.binds)
+	{
+		auto device = mDevices.at(bind.device).get();
+
+		Vector3 value = device->GetValue(bind.keyCode);
+
+		// バインドに割り当てられた加工をする
+		for (const auto& modifier : bind.modifiers)
+		{
+			modifier->ModifyRaw(value);
+		}
+
+		// 絶対値が大きい方を使用する
+		if (std::abs(result.x) < std::abs(value.x)) result.x = value.x;
+		if (std::abs(result.y) < std::abs(value.y)) result.y = value.y;
+		if (std::abs(result.z) < std::abs(value.z)) result.z = value.z;
+	}
+
+	if (result.GetSqLength() > 1.0f) result = result.GetNormalize();
+
+	return result;
 }
 
 void InputManager::Bind(Input::Action action, Input::Device device, KeyCode::Button button, std::vector<std::shared_ptr<IInputModifier>> modifiers, Input::PadSlot slot)

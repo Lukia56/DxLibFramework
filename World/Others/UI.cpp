@@ -32,7 +32,7 @@ UI::~UI()
 
 void UI::Init()
 {
-	GameObject::mTransform.localPosition = Vector3(240.0f, 240.0f, 0.0f);
+	GameObject::mTransform.localPosition = Vector3(60.0f, 60.0f, 0.0f);
 
 	mGraphHandle = LoadGraph(kGraphHandlePath);
 
