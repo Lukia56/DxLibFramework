@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <unordered_map>
 #include "Input/Literal/InputActions.h"
 #include "Input/Literal/InputProperty.h"
@@ -133,7 +134,7 @@ private:
 	/// <summary>
 	/// アクションのデータ
 	/// </summary>
-	std::unordered_map<Input::Action, Input::ActionProperty> mActions;
+	std::array<Input::ActionProperty, static_cast<size_t>(Input::Action::Length)> mActions;
 
 	/// <summary>
 	/// 入力デバイス

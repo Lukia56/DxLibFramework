@@ -1,4 +1,5 @@
 #include "InputManager.h"
+#include <array>
 #include <cmath>
 #include <memory>
 #include <unordered_map>
@@ -18,16 +19,11 @@
 
 bool InputManager::Initialize()
 {
-	// 入力デバイスを登録
 	RegisterDevice<InputDeviceKeyboard>(Input::Device::Keyboard);
 	RegisterDevice<InputDeviceMouse>(Input::Device::Mouse);
 	RegisterDevice<InputDeviceGamepad>(Input::Device::Gamepad);
 
-	// アクションデータを初期化
-	for (int i = 0; i < static_cast<int>(Input::Action::Length); i++)
-	{
-		mActions.emplace(static_cast<Input::Action>(i), Input::ActionProperty());
-	}
+	mActions.fill(Input::ActionProperty());
 
 	Bind(Input::Action::Up, Input::Device::Keyboard, KeyCode::Button::W);
 	Bind(Input::Action::Up, Input::Device::Keyboard, KeyCode::Button::UpArrow);
@@ -111,7 +107,7 @@ bool InputManager::IsHeld(Input::Action action, int frame) const
 
 float InputManager::GetAsFloat(Input::Action action) const
 {
-	const Input::ActionProperty actionProperty = mActions.at(action);
+	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
 
 	float result = 0.0f;
 
@@ -137,7 +133,7 @@ float InputManager::GetAsFloat(Input::Action action) const
 
 Vector2 InputManager::GetAsVector2(Input::Action action) const
 {
-	const Input::ActionProperty actionProperty = mActions.at(action);
+	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
 
 	Vector2 result = Vector2::Zero;
 
@@ -166,7 +162,7 @@ Vector2 InputManager::GetAsVector2(Input::Action action) const
 
 Vector3 InputManager::GetAsVector3(Input::Action action) const
 {
-	const Input::ActionProperty actionProperty = mActions.at(action);
+	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
 
 	Vector3 result = Vector3::Zero;
 
@@ -203,7 +199,7 @@ InputManager& InputManager::GetInstance()
 
 bool InputManager::GetState(Input::Action action, InputType inputType, int frame) const
 {
-	const Input::ActionProperty actionProperty = mActions.at(action);
+	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
 
 	// アクションに割り当てられたボタンをすべてチェックする
 	for (const auto& bind : actionProperty.binds)
@@ -243,5 +239,5 @@ void InputManager::Bind(Input::Action action, Input::Device device, KeyCode::But
 	bind.keyCode = button;
 	bind.modifiers = modifiers;
 	bind.slot = slot;
-	mActions.at(action).binds.emplace_back(bind);
+	mActions[static_cast<size_t>(action)].binds.emplace_back(bind);
 }
