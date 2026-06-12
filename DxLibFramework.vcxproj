@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Camera\CameraFollow.cpp" />
     <ClCompile Include="Camera\CameraDebugFree.cpp" />
     <ClCompile Include="Camera\CameraManager.cpp" />
     <ClCompile Include="System\Input\Mouse.cpp" />
@@ -151,7 +152,6 @@
     <ClCompile Include="World\Others\UI.cpp" />
     <ClCompile Include="World\Components\Rendering\ModelRenderer.cpp" />
     <ClCompile Include="World\Components\Transform.cpp" />
-    <ClCompile Include="World\Others\Camera.cpp" />
     <ClCompile Include="World\Objects\Ball.cpp" />
     <ClCompile Include="Utility\Random.cpp" />
     <ClCompile Include="World\Objects\Crate.cpp" />
@@ -187,6 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Camera\CameraFollow.h" />
     <ClInclude Include="Camera\CameraDebugFree.h" />
     <ClInclude Include="Camera\CameraManager.h" />
     <ClInclude Include="Camera\CameraProperty.h" />
@@ -201,7 +202,6 @@
     <ClInclude Include="World\Others\UI.h" />
     <ClInclude Include="World\Components\Rendering\ModelRenderer.h" />
     <ClInclude Include="World\Components\Transform.h" />
-    <ClInclude Include="World\Others\Camera.h" />
     <ClInclude Include="World\Objects\Ball.h" />
     <ClInclude Include="Utility\Random.h" />
     <ClInclude Include="World\Objects\Crate.h" />
