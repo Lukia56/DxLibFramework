@@ -15,24 +15,12 @@ public:
 	GameObject();
 	virtual ~GameObject();
 
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
 	virtual void Init() = 0;
 
-	/// <summary>
-	/// 終了処理
-	/// </summary>
 	virtual void Finalize() {};
 
-	/// <summary>
-	/// 更新処理
-	/// </summary>
 	virtual void Update() = 0;
 
-	/// <summary>
-	/// 描画処理
-	/// </summary>
 	virtual void Draw() {};
 
 	/// <summary>
@@ -51,35 +39,23 @@ public:
 
 protected:
 
-	/// <summary>
-	/// 子オブジェクトに追加する
-	/// </summary>
-	/// <param name="gameObject">追加するゲームオブジェクトのスマートポインタ</param>
 	/// <returns>追加したゲームオブジェクトの生ポインタ</returns>
 	template <class T>
 	requires std::derived_from<T, GameObject>
-	T* Add(std::unique_ptr<T> gameObject);
+	T* AddToChild(std::unique_ptr<T> child);
 
 	/// <summary>
 	/// ゲームオブジェクトを削除する
-	/// 更新処理の後に削除する
+	/// 実際の削除は更新処理の後に行われる
 	/// </summary>
-	/// <param name="gameObject">削除するゲームオブジェクトのポインタ</param>
-	void Destroy(GameObject* gameObject);
+	void Destroy(GameObject* deleteTarget);
 
 protected:
 
-	/// <summary>
-	/// トランスフォーム
-	/// </summary>
 	Transform mTransform;
 
 private:
 
-	/// <summary>
-	/// 削除処理が呼ばれたかどうか
-	/// 更新処理後に削除するかのフラグ
-	/// </summary>
 	bool mIsCalledDestroy;
 
 	/// <summary>
@@ -91,10 +67,10 @@ private:
 
 template <class T>
 requires std::derived_from<T, GameObject>
-inline T* GameObject::Add(std::unique_ptr<T> gameObject)
+inline T* GameObject::AddToChild(std::unique_ptr<T> child)
 {
-	T* ptr = gameObject.get();
+	T* ptr = child.get();
 	ptr->Init();
-	ptr->GetTransform().SetParent(std::move(gameObject), &mTransform);
+	ptr->GetTransform().SetupParent(std::move(child), &mTransform);
 	return ptr;
 }

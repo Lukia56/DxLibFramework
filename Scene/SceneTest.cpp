@@ -1,7 +1,6 @@
 #include "SceneTest.h"
 #include "../World/Characters/Player.h"
 #include "../World/Objects/Crate.h"
-#include "../World/Others/Camera.h"
 #include "../World/Others/UI.h"
 
 SceneTest::SceneTest() :

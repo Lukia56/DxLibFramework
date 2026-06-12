@@ -34,7 +34,7 @@ void Transform::Translate(const Vector3& translation)
 	localPosition += translation;
 }
 
-void Transform::Rotate(const Vector3& angle)
+void Transform::RotateRad(const Vector3& angle)
 {
 	localRotation += angle;
 }
@@ -48,7 +48,25 @@ void Transform::RotateDeg(const Vector3& angle)
 	);
 }
 
-void Transform::SetParent(Transform* newParent)
+void Transform::SetupParent(std::unique_ptr<GameObject> owner, Transform* newParent)
+{
+	if (mParent)
+	{
+		assert(false && "Transform // すでに親オブジェクトが設定されています");
+		return;
+	}
+
+	// 親を設定
+	mParent = newParent;
+
+	// 新しい親に移動
+	if (mParent)
+	{
+		mParent->GetChildren().emplace_back(std::move(owner));
+	}
+}
+
+void Transform::ChangeParent(Transform* newParent)
 {
 	if (!mParent)
 	{
@@ -83,50 +101,32 @@ void Transform::SetParent(Transform* newParent)
 	}
 }
 
-void Transform::SetParent(std::unique_ptr<GameObject> gameObject, Transform* newParent)
-{
-	if (mParent)
-	{
-		assert(false && "Transform // すでに親オブジェクトが設定されています");
-		return;
-	}
-
-	// 親を設定
-	mParent = newParent;
-
-	// 新しい親に移動
-	if (mParent)
-	{
-		mParent->GetChildren().emplace_back(std::move(gameObject));
-	}
-}
-
-Vector3 Transform::GetWorldPosition() const
+Vector3 Transform::CalculateWorldPosition() const
 {
 	Vector3 world = localPosition;
 
 	// 親オブジェクトについて再帰
-	if (mParent) return world += mParent->GetWorldPosition();
+	if (mParent) return world += mParent->CalculateWorldPosition();
 
 	return world;
 }
 
-Vector3 Transform::GetWorldRotation() const
+Vector3 Transform::CalculateWorldRotation() const
 {
 	Vector3 world = localRotation;
 
 	// 親オブジェクトについて再帰
-	if (mParent) world += mParent->GetWorldRotation();
+	if (mParent) world += mParent->CalculateWorldRotation();
 
 	return world;
 }
 
-Vector3 Transform::GetWorldScale() const
+Vector3 Transform::CalculateWorldScale() const
 {
 	Vector3 world = localScale;
 
 	// 親オブジェクトについて再帰
-	if (mParent) world += mParent->GetWorldScale();
+	if (mParent) world += mParent->CalculateWorldScale();
 
 	return world;
 }

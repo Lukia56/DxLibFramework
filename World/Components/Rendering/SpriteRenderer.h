@@ -4,7 +4,7 @@
 #include "Utility/Vector.h"
 
 /// <summary>
-/// 画像リソースの描画管理を行うクラス
+/// 画像の描画を行う
 /// </summary>
 class SpriteRenderer : public Renderer<Texture>
 {
@@ -20,15 +20,12 @@ public:
 	void Load(const std::string& filePath) override;
 
 	/// <summary>
-	/// リソースをゲームオブジェクトのトランスフォームで描画する
+	/// 画像をゲームオブジェクトのトランスフォームで描画する
 	/// </summary>
 	void Draw() override;
 
 private:
 
-	/// <summary>
-	/// 画像のサイズの半径
-	/// </summary>
-	Vector2 mHalfSize;
+	Vector2 mTexHalfSize;
 };
 

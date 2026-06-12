@@ -2,12 +2,8 @@
 
 #include <DxLib.h>
 
-/// <summary>
-/// 2次元ベクトル
-/// </summary>
 struct Vector2
 {
-	// 座標
 	float x, y;
 
 	/// <summary>
@@ -82,12 +78,8 @@ struct Vector2
 	static const Vector2 NegaYAxis;
 };
 
-/// <summary>
-/// 3次元ベクトル
-/// </summary>
 struct Vector3
 {
-	// 座標
 	float x, y, z;
 
 	/// <summary>

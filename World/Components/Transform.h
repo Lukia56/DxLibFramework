@@ -17,17 +17,14 @@ public:
 	using GameObjectContainer = std::vector<std::unique_ptr<GameObject>>;
 
 	/// <summary>
-	/// ローカル座標
 	/// 親からの相対座標
 	/// </summary>
 	Vector3 localPosition;
 	/// <summary>
-	/// ローカル角度
 	/// 親からの相対角度
 	/// </summary>
 	Vector3 localRotation;
 	/// <summary>
-	/// ローカルスケール
 	/// 親からの相対スケール
 	/// </summary>
 	Vector3 localScale;
@@ -37,92 +34,51 @@ public:
 	Transform(GameObject* owner);
 	~Transform();
 
-	/// <summary>
-	/// 座標移動
-	/// </summary>
 	void Translate(const Vector3& translation);
 
-	/// <summary>
-	/// ラジアン角で回転
-	/// </summary>
-	void Rotate(const Vector3& angle);
-
-	/// <summary>
-	/// デグリー角で回転
-	/// </summary>
-	/// <param name="angle"></param>
+	void RotateRad(const Vector3& angle);
 	void RotateDeg(const Vector3& angle);
 
 	/// <summary>
-	/// 親トランスフォームを設定する
-	/// すでに親が設定されている場合用
-	/// nullptrなら解放する
+	/// まだ親が設定されていない場合にのみ使用
 	/// </summary>
-	/// <param name="newParent">新しい親トランスフォーム</param>
-	void SetParent(Transform* newParent);
+	void SetupParent(std::unique_ptr<GameObject> owner, Transform* newParent);
 
 	/// <summary>
-	/// 親トランスフォームを設定する
-	/// まだ親が設定されていない場合用
+	/// すでに親が設定されている場合にのみ使用
+	/// nullptrを指定したら所有者を解放する
 	/// </summary>
-	void SetParent(std::unique_ptr<GameObject> gameObject, Transform* newParent);
+	void ChangeParent(Transform* newParent);
 
 	/// <summary>
-	/// ワールド座標を取得する
+	/// 親オブジェクトについて再帰し、ワールド座標を取得する
 	/// </summary>
-	Vector3 GetWorldPosition() const;
+	Vector3 CalculateWorldPosition() const;
 
 	/// <summary>
-	/// ワールド角度を取得する
+	/// 親オブジェクトについて再帰し、ワールド角度を取得する
 	/// </summary>
-	Vector3 GetWorldRotation() const;
+	Vector3 CalculateWorldRotation() const;
 
 	/// <summary>
-	/// ワールドスケールを取得する
+	/// 親オブジェクトについて再帰し、ワールドスケールを取得する
 	/// </summary>
-	Vector3 GetWorldScale() const;
+	Vector3 CalculateWorldScale() const;
 
 public:
 	
-	/// <summary>
-	/// 角度をデグリー角で取得
-	/// </summary>
 	Vector3 GetRotationAsDeg() const;
-
-	/// <summary>
-	/// 角度をデグリー角で設定
-	/// </summary>
 	void SetRotationAsDeg(const Vector3& angle);
 
-	/// <summary>
-	/// 自身の所有者のゲームオブジェクトを取得する
-	/// </summary>
-	//GameObject* GetOwner() const { return mOwner; }
-
-	/// <summary>
-	/// 親トランスフォームを取得する
-	/// </summary>
-	Transform* GetParent() const { return mParent; }
-
-	/// <summary>
-	/// 子オブジェクトを取得する
-	/// </summary>
 	GameObjectContainer& GetChildren() { return mChildren; }
+
+	Transform* GetParent() const { return mParent; }
 
 private:
 
-	/// <summary>
-	/// 自身の所有権を持ったオブジェクト
-	/// </summary>
-	GameObject* mOwner;
+	GameObjectContainer mChildren;
 
-	/// <summary>
-	/// 親トランスフォーム
-	/// </summary>
 	Transform* mParent;
 
-	/// <summary>
-	/// 自身の子オブジェクト
-	/// </summary>
-	GameObjectContainer mChildren;
+	GameObject* mOwner;
 };

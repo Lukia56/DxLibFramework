@@ -11,7 +11,7 @@ void Bullet::Init()
 {
 	for (int i = 0; i < 1; i++)
 	{
-		Add(std::make_unique<Box>());
+		AddToChild(std::make_unique<Box>());
 	}
 }
 

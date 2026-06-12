@@ -23,7 +23,7 @@ bool GameObject::CheckDestroy()
 		// 終了処理を呼ぶ
 		Finalize();
 
-		mTransform.SetParent(nullptr);
+		mTransform.ChangeParent(nullptr);
 
 		return true;
 	}
@@ -39,12 +39,12 @@ bool GameObject::CheckDestroy()
 	return false;
 }
 
-void GameObject::Destroy(GameObject* gameObject)
+void GameObject::Destroy(GameObject* deleteTarget)
 {
-	if (gameObject == nullptr)
+	if (deleteTarget == nullptr)
 	{
 		assert(false && "GameObject // 削除しようとしたゲームオブジェクトはnullptrです");
 		return;
 	}
-	gameObject->mIsCalledDestroy = true;
+	deleteTarget->mIsCalledDestroy = true;
 }

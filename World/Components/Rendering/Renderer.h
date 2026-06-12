@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <string>
 #include "System/ResourceManager.h"
 #include "System/Resource/Resource.h"
@@ -7,7 +8,7 @@
 class GameObject;
 
 /// <summary>
-/// グラフィックリソースの描画管理の基底クラス
+/// グラフィックリソースの描画を行う基底
 /// </summary>
 template<class T>
 requires std::derived_from<T, Resource>

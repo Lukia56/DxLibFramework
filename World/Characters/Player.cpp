@@ -46,7 +46,7 @@ void Player::Init()
 
 	for (int i = 0; i < 5; i++)
 	{
-		Add(std::make_unique<Bullet>());
+		AddToChild(std::make_unique<Bullet>());
 	}
 }
 
@@ -57,7 +57,7 @@ void Player::Finalize()
 void Player::Update()
 {
 	GameObject::mTransform.localPosition += InputManager::GetInstance().GetAsVector3(Input::Action::Move) * kSpeed;
-	mCollider->SetPosition(GameObject::mTransform.GetWorldPosition());
+	mCollider->SetPosition(GameObject::mTransform.CalculateWorldPosition());
 }
 
 void Player::Draw()

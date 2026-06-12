@@ -3,7 +3,7 @@
 #include "Renderer.h"
 
 /// <summary>
-/// モデルリソースの描画管理を行うクラス
+/// モデルの描画を行う
 /// </summary>
 class ModelRenderer : public Renderer<Model>
 {
@@ -13,7 +13,7 @@ public:
 	~ModelRenderer() = default;
 
 	/// <summary>
-	/// リソースをゲームオブジェクトのトランスフォームで描画する
+	/// モデルをゲームオブジェクトのトランスフォームで描画する
 	/// </summary>
 	void Draw() override;
 };

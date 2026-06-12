@@ -4,7 +4,7 @@
 #include "Utility/Color.h"
 
 /// <summary>
-/// テキストの描画管理を行うクラス
+/// テキストの描画を行う
 /// </summary>
 class TextRenderer : public Renderer<Font>
 {
@@ -14,37 +14,21 @@ public:
 	~TextRenderer() = default;
 
 	/// <summary>
-	/// リソースをゲームオブジェクトのトランスフォームで描画する
+	/// テキストをゲームオブジェクトのトランスフォームで描画する
 	/// </summary>
 	void Draw() override;
 
-	/// <summary>
-	/// 表示するテキストを変更する
-	/// </summary>
-	void SetText(const std::string& text) { mText = text; }
-	/// <summary>
-	/// テキストの色を設定する
-	/// </summary>
+	void SetDisplayText(const std::string& text) { mDisplayText = text; }
+	
 	void SetColor(const Color& color) { mColor = color; }
-	/// <summary>
-	/// スケーリングを適用するかのフラグを設定する
-	/// </summary>
-	void SetScalingFlag(const bool flag) { mScalingFlag = flag; }
+
+	void SetScalingFlag(const bool flag) { mIsScaling = flag; }
 
 private:
 
-	/// <summary>
-	/// 表示するテキスト
-	/// </summary>
-	std::string mText;
+	std::string mDisplayText;
 
-	/// <summary>
-	/// テキストの色
-	/// </summary>
 	Color mColor;
 
-	/// <summary>
-	/// スケーリングをするかどうか
-	/// </summary>
-	bool mScalingFlag;
+	bool mIsScaling;
 };

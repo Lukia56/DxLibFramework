@@ -10,7 +10,7 @@ class Random
 public:
 
 	/// <summary>
-	/// 初期化処理
+	/// シード値の初期化を行う
 	/// </summary>
 	static void Init();
 
@@ -20,7 +20,7 @@ public:
 	/// <param name="minInclude">最小値（含む）</param>
 	/// <param name="maxExclude">最大値（含まない）</param>
 	template <std::integral T>
-	static T Get(T minInclude, T maxExclude);
+	static T Range(T minInclude, T maxExclude);
 
 	/// <summary>
 	/// 引数の範囲内での実数乱数を生成
@@ -28,7 +28,7 @@ public:
 	/// <param name="minInclude">最小値（含む）</param>
 	/// <param name="maxInclude">最大値（含む）</param>
 	template <std::floating_point T>
-	static T Get(T minInclude, T maxInclude);
+	static T Range(T minInclude, T maxInclude);
 
 	/// <summary>
 	/// 0.0～1.0の実数の乱数生成
@@ -51,14 +51,14 @@ private:
 };
 
 template<std::integral T>
-inline T Random::Get(T minInclude, T maxExclude)
+inline T Random::Range(T minInclude, T maxExclude)
 {
 	std::uniform_int_distribution<T> dist(minInclude, maxExclude - 1);
 	return dist(Engine());
 }
 
 template<std::floating_point T>
-inline T Random::Get(T minInclude, T maxInclude)
+inline T Random::Range(T minInclude, T maxInclude)
 {
 	std::uniform_real_distribution<T> dist(minInclude, maxInclude);
 	return dist(Engine());

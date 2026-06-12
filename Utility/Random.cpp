@@ -9,12 +9,12 @@ void Random::Init()
 
 float Random::Get0To1()
 {
-	return Get<float>(0.0f, 1.0f);
+	return Range<float>(0.0f, 1.0f);
 }
 
 bool Random::Judge(float percent)
 {
-	return (Get<float>(0.0f, 100.0f) < percent);
+	return (Range<float>(0.0f, 100.0f) < percent);
 }
 
 std::mt19937& Random::Engine()

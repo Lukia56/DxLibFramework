@@ -39,7 +39,7 @@ void UI::Init()
 	mSprite->Load(kGraphHandlePath);
 
 	mText->Load(kFontHandlePath);
-	mText->SetText("テストテキスト");
+	mText->SetDisplayText("テストテキスト");
 }
 
 void UI::Update()
