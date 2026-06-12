@@ -82,6 +82,10 @@ public:
 	/// </summary>
 	static InputManager& GetInstance();
 
+public:
+
+	void SetActiveActionMap(Input::ActionMap map, bool flag) { mActionMapState[static_cast<size_t>(map)] = flag; }
+
 private:
 
 	InputManager() = default;
@@ -140,6 +144,11 @@ private:
 	/// 入力デバイス
 	/// </summary>
 	std::unordered_map<Input::Device, std::unique_ptr<InputDeviceBase>> mDevices;
+
+	/// <summary>
+	/// アクションマップの有効状態
+	/// </summary>
+	std::array<bool, static_cast<size_t>(Input::ActionMap::Length)> mActionMapState;
 };
 
 template<InputDevice T>

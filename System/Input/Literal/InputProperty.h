@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include "KeyCodes.h"
+#include "InputActionMaps.h"
 
 class IInputModifier;
 
@@ -49,5 +50,7 @@ namespace Input
 	{
 		// ƒoƒCƒ“ƒh
 		std::vector<BindProperty> binds;
+
+		ActionMap map;
 	};
 }

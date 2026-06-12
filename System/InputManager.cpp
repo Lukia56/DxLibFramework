@@ -24,6 +24,15 @@ bool InputManager::Initialize()
 	RegisterDevice<InputDeviceGamepad>(Input::Device::Gamepad);
 
 	mActions.fill(Input::ActionProperty());
+	mActionMapState.fill(true);
+
+	mActions[static_cast<size_t>(Input::Action::Up)].map = Input::ActionMap::UI;
+	mActions[static_cast<size_t>(Input::Action::Down)].map = Input::ActionMap::UI;
+	mActions[static_cast<size_t>(Input::Action::Left)].map = Input::ActionMap::UI;
+	mActions[static_cast<size_t>(Input::Action::Right)].map = Input::ActionMap::UI;
+	mActions[static_cast<size_t>(Input::Action::Move)].map = Input::ActionMap::Player;
+	mActions[static_cast<size_t>(Input::Action::Look)].map = Input::ActionMap::Player;
+	mActions[static_cast<size_t>(Input::Action::Fly)].map = Input::ActionMap::Debug;
 
 	Bind(Input::Action::Up, Input::Device::Keyboard, KeyCode::Button::W);
 	Bind(Input::Action::Up, Input::Device::Keyboard, KeyCode::Button::UpArrow);
@@ -39,7 +48,10 @@ bool InputManager::Initialize()
 	Bind(Input::Action::Left, Input::Device::Gamepad, KeyCode::Button::GpFaceLeft);
 	Bind(Input::Action::Right, Input::Device::Gamepad, KeyCode::Button::GpFaceRight);
 
-	Bind(Input::Action::Move, Input::Device::Gamepad, KeyCode::Button::GpLeftThumb, { std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::XZY) });
+	Bind(Input::Action::Move, Input::Device::Gamepad, KeyCode::Button::GpLeftThumb,
+		{
+			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::XZY)
+		});
 	Bind(Input::Action::Move, Input::Device::Keyboard, KeyCode::Button::W,
 		{
 			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::ZYX)
@@ -109,6 +121,9 @@ float InputManager::GetAsFloat(Input::Action action) const
 {
 	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
 
+	// 対応したアクションマップが無効化されていたら
+	if (!mActionMapState[static_cast<size_t>(actionProperty.map)]) return 0.0f;
+
 	float result = 0.0f;
 
 	// アクションに割り当てられたボタンをすべてチェックする
@@ -134,6 +149,9 @@ float InputManager::GetAsFloat(Input::Action action) const
 Vector2 InputManager::GetAsVector2(Input::Action action) const
 {
 	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
+
+	// 対応したアクションマップが無効化されていたら
+	if (!mActionMapState[static_cast<size_t>(actionProperty.map)]) return Vector2::Zero;
 
 	Vector2 result = Vector2::Zero;
 
@@ -163,6 +181,9 @@ Vector2 InputManager::GetAsVector2(Input::Action action) const
 Vector3 InputManager::GetAsVector3(Input::Action action) const
 {
 	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
+
+	// 対応したアクションマップが無効化されていたら
+	if (!mActionMapState[static_cast<size_t>(actionProperty.map)]) return Vector3::Zero;
 
 	Vector3 result = Vector3::Zero;
 
@@ -200,6 +221,9 @@ InputManager& InputManager::GetInstance()
 bool InputManager::GetState(Input::Action action, InputType inputType, int frame) const
 {
 	const Input::ActionProperty actionProperty = mActions[static_cast<size_t>(action)];
+
+	// 対応したアクションマップが無効化されていたらfalse
+	if (!mActionMapState[static_cast<size_t>(actionProperty.map)]) return false;
 
 	// アクションに割り当てられたボタンをすべてチェックする
 	for (const auto& bind : actionProperty.binds)

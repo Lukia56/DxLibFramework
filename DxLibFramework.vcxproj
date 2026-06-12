@@ -191,6 +191,7 @@
     <ClInclude Include="Camera\CameraManager.h" />
     <ClInclude Include="Camera\CameraProperty.h" />
     <ClInclude Include="Camera\ICamera.h" />
+    <ClInclude Include="System\Input\Literal\InputActionMaps.h" />
     <ClInclude Include="System\Input\Modifier\InputModifierDeadzone.h" />
     <ClInclude Include="World\Components\Rendering\Renderer.h" />
     <ClInclude Include="System\ResourceManager.h" />

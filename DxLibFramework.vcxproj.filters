@@ -308,5 +308,8 @@
     <ClInclude Include="Camera\CameraDebugFree.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="System\Input\Literal\InputActionMaps.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
