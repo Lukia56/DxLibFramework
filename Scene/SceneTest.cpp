@@ -4,15 +4,13 @@
 #include "../World/Others/UI.h"
 
 SceneTest::SceneTest() :
-	//mCamera(nullptr),
 	mPlayer(nullptr),
 	mCrate(nullptr),
 	mUI(nullptr)
 {
-	//mCamera = Add(std::make_unique<Camera>());
-	mPlayer = Add(std::make_unique<Player>());
-	mCrate = Add(std::make_unique<Crate>());
-	mUI = Add(std::make_unique<UI>());
+	mPlayer = AddToRoot(std::make_unique<Player>());
+	mCrate = AddToRoot(std::make_unique<Crate>());
+	mUI = AddToRoot(std::make_unique<UI>());
 
 	mPlayer->SetCrate(mCrate);
 }
@@ -22,7 +20,6 @@ SceneTest::~SceneTest()
 	mUI = nullptr;
 	mCrate = nullptr;
 	mPlayer = nullptr;
-	//mCamera = nullptr;
 }
 
 void SceneTest::Init()

@@ -45,10 +45,9 @@ void SceneBase::DrawBase()
 
 void SceneBase::UpdateRootObjects()
 {
-	// ゲームオブジェクトの更新処理を呼ぶ
 	for (const auto& it : mRootObjects)
 	{
-		Update(it.get());
+		UpdateGameObject(it.get());
 	}
 
 	// 削除チェック
@@ -60,14 +59,13 @@ void SceneBase::UpdateRootObjects()
 
 void SceneBase::DrawRootObjects()
 {
-	// ゲームオブジェクトの描画処理を呼ぶ
 	for (const auto& it : mRootObjects)
 	{
-		Draw(it.get());
+		DrawGameObject(it.get());
 	}
 }
 
-void SceneBase::Update(GameObject* gameObject)
+void SceneBase::UpdateGameObject(GameObject* gameObject)
 {
 	if (!gameObject->IsActive()) return;
 
@@ -76,11 +74,11 @@ void SceneBase::Update(GameObject* gameObject)
 	// 子オブジェクトについて再帰
 	for (const auto& it : gameObject->GetTransform().GetChildren())
 	{
-		Update(it.get());
+		UpdateGameObject(it.get());
 	}
 }
 
-void SceneBase::Draw(GameObject* gameObject)
+void SceneBase::DrawGameObject(GameObject* gameObject)
 {
 	if (!gameObject->IsActive()) return;
 
@@ -89,6 +87,6 @@ void SceneBase::Draw(GameObject* gameObject)
 	// 子オブジェクトについて再帰
 	for (const auto& it : gameObject->GetTransform().GetChildren())
 	{
-		Draw(it.get());
+		DrawGameObject(it.get());
 	}
 }

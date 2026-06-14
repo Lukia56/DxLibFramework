@@ -16,17 +16,11 @@ namespace Math
 	// 小数の誤差許容範囲
 	constexpr float Epsilon = 0.00001f;
 
-	/// <summary>
-	/// ラジアン角に変換
-	/// </summary>
 	template <std::floating_point T>
 	constexpr T ToRadian(const T degree)
 	{
 		return degree * kPi / 180.0f;
 	}
-	/// <summary>
-	/// デグリー角に変換
-	/// </summary>
 	template <std::floating_point T>
 	constexpr T ToDegree(const T radian)
 	{
@@ -55,31 +49,16 @@ namespace Math
 		return radian;
 	}
 
-	/// <summary>
-	/// 2つの値を比べて大きいほうを取得する
-	/// </summary>
-	/// <returns>大きいほうの値</returns>
 	template <typename T>
 	constexpr T Max(const T a, const T b)
 	{
 		return (a > b ? a : b);
 	}
-	/// <summary>
-	/// 2つの値を比べて小さいほうを取得する
-	/// </summary>
-	/// <returns>小さいほうの値</returns>
 	template <typename T>
 	constexpr T Min(const T a, const T b)
 	{
 		return (a > b ? b : a);
 	}
-	/// <summary>
-	/// 値を範囲内に収める
-	/// </summary>
-	/// <param name="value">値を収める</param>
-	/// <param name="min">最小値</param>
-	/// <param name="max">最大値</param>
-	/// <returns></returns>
 	template <typename T>
 	constexpr T Clamp(const T value, const T min, const T max)
 	{
@@ -122,9 +101,6 @@ namespace Math
 		return value * value;
 	}
 
-	/// <summary>
-	/// 線形補間
-	/// </summary>
 	template <std::floating_point T>
 	constexpr T Leap(const T a, const T b, const T t)
 	{
@@ -136,9 +112,6 @@ namespace Math
 		T time = Math::Clamp(t * delta, 0.0f, 1.0f);
 		return a + (b - a) * time;
 	}
-	/// <summary>
-	/// 等速補間
-	/// </summary>
 	template <typename T>
 	constexpr T Approach(const T src, const T dst, const T change)
 	{

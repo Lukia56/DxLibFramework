@@ -19,25 +19,11 @@ public:
 	SceneBase();
 	virtual ~SceneBase();
 
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
 	virtual void Init() = 0;
-
-	/// <summary>
-	/// 終了処理
-	/// </summary>
 	virtual void Finalize() = 0;
 
-	/// <summary>
-	/// 基底の更新処理
-	/// </summary>
 	/// <returns>次のシーンのポインタ</returns>
 	std::unique_ptr<SceneBase> UpdateBase();
-
-	/// <summary>
-	/// 基底の描画処理
-	/// </summary>
 	void DrawBase();
 
 public:
@@ -47,41 +33,23 @@ public:
 protected:
 
 	/// <summary>
-	/// 更新処理
+	/// 派生の更新処理
 	/// </summary>
 	/// <returns>次のシーンのポインタ</returns>
 	virtual std::unique_ptr<SceneBase> Update() = 0;
 
-	/// <summary>
-	/// ルートオブジェクトに追加する
-	/// </summary>
-	/// <param name="gameObject">追加するルートオブジェクトのスマートポインタ</param>
-	/// <returns>追加したルートオブジェクトの生ポインタ</returns>
+	/// <returns>追加したゲームオブジェクトの生ポインタ</returns>
 	template <class T>
 	requires std::derived_from<T, GameObject>
-	T* Add(std::unique_ptr<T> gameObject);
+	T* AddToRoot(std::unique_ptr<T> root);
 
 private:
 
-	/// <summary>
-	/// ルートオブジェクトの更新処理を呼ぶ
-	/// </summary>
 	void UpdateRootObjects();
-
-	/// <summary>
-	/// ルートオブジェクトの描画処理を呼ぶ
-	/// </summary>
 	void DrawRootObjects();
 
-	/// <summary>
-	/// ゲームオブジェクトの更新処理
-	/// </summary>
-	void Update(GameObject* gameObject);
-
-	/// <summary>
-	/// ゲームオブジェクトの描画処理
-	/// </summary>
-	void Draw(GameObject* gameObject);
+	void UpdateGameObject(GameObject* gameObject);
+	void DrawGameObject(GameObject* gameObject);
 
 private:
 	
@@ -92,10 +60,10 @@ private:
 
 template <class T>
 requires std::derived_from<T, GameObject>
-inline T* SceneBase::Add(std::unique_ptr<T> gameObject)
+inline T* SceneBase::AddToRoot(std::unique_ptr<T> root)
 {
-	T* ptr = gameObject.get();
+	T* ptr = root.get();
 	ptr->Init();
-	mRootObjects.emplace_back(std::move(gameObject));
+	mRootObjects.emplace_back(std::move(root));
 	return ptr;
 }
