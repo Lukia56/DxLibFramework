@@ -2,13 +2,14 @@
 #include <cmath>
 #include "System/InputManager.h"
 #include "System/Input/Mouse.h"
+#include "System/TimeManager.h"
 #include "Utility/Color.h"
 #include "Utility/Math.h"
 #include "Utility/Vector.h"
 
 namespace
 {
-	constexpr float kMoveSpeed = 10.0f;
+	constexpr float kMoveSpeed = 600.0f;
 	constexpr float kRotSpeed = Math::ToRadian(10.0f);
 
 	constexpr float kDistanceToTarget = 100.0f;
@@ -80,10 +81,10 @@ void CameraDebugFree::Move()
 	right.z = -std::sin(yawRad);
 
 	Vector3 moveDir = InputManager::GetInstance().GetAsVector3(Input::Action::Move);
-	mPosition += forward * kMoveSpeed * moveDir.z;
-	mPosition += right * kMoveSpeed * moveDir.x;
+	mPosition += forward * kMoveSpeed * moveDir.z * TimeManager::GetDeltaTime();
+	mPosition += right * kMoveSpeed * moveDir.x * TimeManager::GetDeltaTime();
 
-	mPosition.y += kMoveSpeed * InputManager::GetInstance().GetAsFloat(Input::Action::Fly);
+	mPosition.y += kMoveSpeed * InputManager::GetInstance().GetAsFloat(Input::Action::Fly) * TimeManager::GetDeltaTime();
 }
 
 void CameraDebugFree::DrawCrossHair()

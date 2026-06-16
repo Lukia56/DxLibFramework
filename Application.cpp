@@ -6,6 +6,7 @@
 #include "Scene/SceneManager.h"
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
+#include "System/TimeManager.h"
 #include "Utility/Random.h"
 
 Application::Application()
@@ -38,6 +39,8 @@ bool Application::Initialize()
 	// シーンマネージャーを初期化
 	mSceneManager = std::make_unique<SceneManager>();
 	mSceneManager->Initialize();
+
+	TimeManager::Initialize();
 
 	// 入力マネージャーを初期化
 	InputManager::GetInstance().Initialize();
@@ -84,12 +87,11 @@ void Application::ProcessInput()
 
 void Application::Update()
 {
-	using clock = std::chrono::steady_clock;
-	auto start = clock::now();
+	using namespace std::chrono;
+	while (duration_cast<microseconds>(steady_clock::now() - TimeManager::GetPrevTime()) < microseconds(TimeManager::GetFixedDeltaTimeMs())) {}
+	TimeManager::Update();
 
 	mSceneManager->Update();
-
-	while (std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start) < std::chrono::microseconds(16667)) {}
 }
 
 void Application::ProcessOutput()
@@ -99,6 +101,8 @@ void Application::ProcessOutput()
 	clsDx();
 
 #ifdef _DEBUG
+	printfDx("RealFPS: %.1f\n", 1 / TimeManager::GetRawDeltaTime());
+
 	PROCESS_MEMORY_COUNTERS_EX pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
 	printfDx("Memory: %.3f MB\n", pmc.WorkingSetSize / 1024.0f / 1024.0f);

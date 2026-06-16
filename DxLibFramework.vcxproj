@@ -146,6 +146,7 @@
     <ClCompile Include="System\Input\Mouse.cpp" />
     <ClCompile Include="System\ResourceManager.cpp" />
     <ClCompile Include="System\Resource\Resource.cpp" />
+    <ClCompile Include="System\TimeManager.cpp" />
     <ClCompile Include="Utility\Color.cpp" />
     <ClCompile Include="World\Components\Rendering\SpriteRenderer.cpp" />
     <ClCompile Include="World\Components\Rendering\TextRenderer.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Camera\ICamera.h" />
     <ClInclude Include="System\Input\Literal\InputActionMaps.h" />
     <ClInclude Include="System\Input\Modifier\InputModifierDeadzone.h" />
+    <ClInclude Include="System\TimeManager.h" />
     <ClInclude Include="World\Components\Rendering\Renderer.h" />
     <ClInclude Include="System\ResourceManager.h" />
     <ClInclude Include="System\Resource\Resource.h" />

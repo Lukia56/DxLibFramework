@@ -8,10 +8,11 @@
 #include "../Objects/Bullet.h"
 #include "../Objects/Crate.h"
 #include "System/InputManager.h"
+#include "System/TimeManager.h"
 
 namespace
 {
-	constexpr float kSpeed = 10.0f;
+	constexpr float kSpeed = 600.0f;
 
 	constexpr Vector3 kInitScale{ 0.3f, 0.3f, 0.3f };
 
@@ -56,7 +57,7 @@ void Player::Finalize()
 
 void Player::Update()
 {
-	GameObject::mTransform.localPosition += InputManager::GetInstance().GetAsVector3(Input::Action::Move) * kSpeed;
+	GameObject::mTransform.localPosition += InputManager::GetInstance().GetAsVector3(Input::Action::Move) * kSpeed * TimeManager::GetDeltaTime();
 	mCollider->SetPosition(GameObject::mTransform.CalculateWorldPosition());
 }
 
