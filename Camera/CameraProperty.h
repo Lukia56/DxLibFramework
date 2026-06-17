@@ -20,7 +20,7 @@ namespace Camera
 
 	enum class Type
 	{
-		Follow,
+		Static,
 		DebugFree,
 		Max,
 	};

@@ -13,7 +13,7 @@ namespace
 }
 
 CameraManager::CameraManager() :
-	mCurrentCameraType(Camera::Type::Follow),
+	mCurrentCameraType(Camera::Type::Static),
 	mView{ .fov = Math::ToRadian(kInitFOV), .nearClip = kInitNearClip, .farClip = kInitFarClip }
 {
 	// .fillだとエラーになるためforループ

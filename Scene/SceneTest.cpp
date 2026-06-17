@@ -2,6 +2,8 @@
 #include "../World/Characters/Player.h"
 #include "../World/Objects/Crate.h"
 #include "../World/Others/UI.h"
+#include "Camera/CameraDebugFree.h"
+#include "Camera/CameraManager.h"
 
 SceneTest::SceneTest() :
 	mPlayer(nullptr),
@@ -13,6 +15,9 @@ SceneTest::SceneTest() :
 	mUI = AddToRoot(std::make_unique<UI>());
 
 	mPlayer->SetCrate(mCrate);
+
+	GetCameraManager()->AddCamera(Camera::Type::DebugFree, std::make_unique<CameraDebugFree>());
+	GetCameraManager()->SetCurrentCameraType(Camera::Type::DebugFree);
 }
 
 SceneTest::~SceneTest()

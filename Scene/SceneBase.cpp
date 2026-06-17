@@ -3,14 +3,14 @@
 #include <memory>
 #include "../World/GameObject.h"
 #include "Camera/CameraManager.h"
-#include "Camera/CameraDebugFree.h"
+#include "Camera/CameraStatic.h"
 
 SceneBase::SceneBase() :
 	mCameraManager(nullptr)
 {
 	mCameraManager = std::make_unique<CameraManager>();
-	mCameraManager->AddCamera(Camera::Type::DebugFree, std::make_unique<CameraDebugFree>());
-	mCameraManager->SetCurrentCameraType(Camera::Type::DebugFree);
+	mCameraManager->AddCamera(Camera::Type::Static, std::make_unique<CameraStatic>());
+	mCameraManager->SetCurrentCameraType(Camera::Type::Static);
 }
 
 SceneBase::~SceneBase()

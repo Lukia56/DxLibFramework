@@ -147,7 +147,10 @@
     <ClCompile Include="Camera\CameraDebugFree.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Camera\CameraFollow.cpp">
+    <ClCompile Include="System\TimeManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\CameraStatic.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -308,10 +311,10 @@
     <ClInclude Include="System\Input\Literal\InputActionMaps.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Camera\CameraFollow.h">
+    <ClInclude Include="System\TimeManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="System\TimeManager.h">
+    <ClInclude Include="Camera\CameraStatic.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
