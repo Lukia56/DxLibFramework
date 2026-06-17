@@ -12,8 +12,14 @@ public:
 	ModelRenderer(GameObject* owner);
 	~ModelRenderer() = default;
 
+	void Load(const std::string& filePath) override;
+
 	/// <summary>
 	/// モデルをゲームオブジェクトのトランスフォームで描画する
 	/// </summary>
 	void Draw() override;
+
+private:
+
+	int mModelHandle;
 };

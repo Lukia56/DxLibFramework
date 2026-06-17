@@ -4,8 +4,16 @@
 #include "System/Resource/Resource.h"
 
 ModelRenderer::ModelRenderer(GameObject* owner) :
-	Renderer(owner)
+	Renderer(owner),
+	mModelHandle(-1)
 {
+}
+
+void ModelRenderer::Load(const std::string& filePath)
+{
+	Renderer::Load(filePath);
+
+	mModelHandle = mResource->GetHandle();
 }
 
 void ModelRenderer::Draw()
@@ -17,13 +25,9 @@ void ModelRenderer::Draw()
 	const VECTOR rot = mOwner->GetTransform().CalculateWorldRotation().GetAsDxLibVector();
 	const VECTOR scale = mOwner->GetTransform().CalculateWorldScale().GetAsDxLibVector();
 
-	int handle = mResource->GetHandle();
+	MV1SetPosition(mModelHandle, pos);
+	MV1SetRotationXYZ(mModelHandle, rot);
+	MV1SetScale(mModelHandle, scale);
 
-	MV1SetPosition(handle, pos);
-	MV1SetRotationXYZ(handle, rot);
-	MV1SetScale(handle, scale);
-
-	MV1DrawModel(handle);
-
-	MV1DeleteModel(handle);
+	MV1DrawModel(mModelHandle);
 }
