@@ -2,14 +2,18 @@
 #include <chrono>
 #include <memory>
 #include <DxLib.h>
+#include <imgui.h>
 #include <Psapi.h>
 #include "Scene/SceneManager.h"
+#include "System/ImGuiRenderer.h"
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
 #include "System/TimeManager.h"
 #include "Utility/Random.h"
 
-Application::Application()
+Application::Application() :
+	mSceneManager(nullptr),
+	mImGuiRenderer(nullptr)
 {
 }
 
@@ -40,6 +44,9 @@ bool Application::Initialize()
 	mSceneManager = std::make_unique<SceneManager>();
 	mSceneManager->Initialize();
 
+	mImGuiRenderer = std::make_unique<ImGuiRenderer>();
+	mImGuiRenderer->Initialize();
+
 	TimeManager::Initialize();
 
 	// 入力マネージャーを初期化
@@ -57,6 +64,7 @@ bool Application::Initialize()
 void Application::Finalize()
 {
 	// メンバの後処理
+	mImGuiRenderer->Finalize();
 	mSceneManager->Finalize();
 
 	ResourceManager::GetInstance().Finalize();
@@ -100,15 +108,25 @@ void Application::ProcessOutput()
 	ClearDrawScreen();
 	clsDx();
 
-#ifdef _DEBUG
-	printfDx("RealFPS: %.1f\n", 1 / TimeManager::GetRawDeltaTime());
-
-	PROCESS_MEMORY_COUNTERS_EX pmc;
-	GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
-	printfDx("Memory: %.3f MB\n", pmc.WorkingSetSize / 1024.0f / 1024.0f);
-#endif
-
 	mSceneManager->Draw();
+
+#ifdef _DEBUG
+	mImGuiRenderer->Draw([this]()
+		{
+			if (ImGui::Begin("System"))
+			{
+				ImGui::Text("RealFPS %.1f", 1.0f / TimeManager::GetRawDeltaTime());
+
+				PROCESS_MEMORY_COUNTERS_EX pmc;
+				GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+				ImGui::Text("Memory %.3f MB", pmc.WorkingSetSize / 1024.0f / 1024.0f);
+
+				ImGui::End();
+			}
+
+			mSceneManager->DebugDraw();
+		});
+#endif
 
 	// 画面に表示
 	ScreenFlip();
